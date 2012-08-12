@@ -1,0 +1,8 @@
+<!-- START: Your review -->
+<div class="reviews">
+	<h3>Your review</h3>
+	<% @reviews.each do |review| %>
+		<%= render :partial => "reviews/show", :object => review %>
+	<% end %>
+</div>
+<!-- END: Your review -->

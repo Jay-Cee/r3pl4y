@@ -1,0 +1,29 @@
+<section class="suggestion">
+<h2>Listing suggestions</h2>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Game</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @suggestions.each do |suggestion| %>
+  <tr>
+    <td><%= truncate(suggestion.description, :length => 15) %></td>
+    <td><%= suggestion.game.title %></td>
+    <td><%= suggestion.user.name %></td>
+    <td><%= link_to 'Preview', preview_suggestion_path(suggestion) %></td>
+    <td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>
+    <% if suggestion.accepted %>
+      <td><%= link_to 'Deny', deny_suggestion_path(suggestion) %></td>
+    <% else %>
+      <td><%= link_to 'Accept', accept_suggestion_path(suggestion) %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+</section>

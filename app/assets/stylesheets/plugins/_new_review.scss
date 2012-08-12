@@ -1,0 +1,237 @@
+/* @group NEW_REVIEW plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+@mixin twitter() {
+	background: none;
+	background-color: #1BB7E7;
+	border: 1px solid #127B9B;
+	text-shadow: #127B9B 0px -1px 0px;
+	@include linear-gradient(#1BB7E7, #029AC9);
+}
+
+@mixin facebook() {
+	background: none;
+	background-color: #395484;
+	border: 1px solid #3B6597;
+	text-shadow: #3B6597 0px -1px 0px;
+	@include linear-gradient(#6291C7, #5681B0);
+}
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+// open new review button
+.review-button {
+  
+  &[data-icon]:before {
+    text-indent: 0px;
+    font-size: $fontsize-header * 1.5;
+    padding-right: $space;
+    vertical-align: middle;
+    text-transform: none;
+  }
+}
+
+/*
+Writing a new review for a game
+*/
+.new-review {
+	font-size: 18px;
+	position: relative;
+	
+	h2 {
+		font-size: 24px;
+		margin-bottom: 0.5em;
+	}
+
+	textarea {
+		width: 435px;
+		height: 325px;
+		font-size: 16px; 
+		font-family: Chicago, Espy Sans, Myriad, Helvetica;
+		float: left;
+	}
+	#wmd-preview {
+		//width: 435px;
+		height: 330px;
+		padding: 10px;
+		font-size: 16px;
+		//float: right;
+		background-color: #F1F1F1;
+		overflow-y: auto;
+	
+		/*
+		Remove margin top for first p, because it looks ridicoulus
+		*/
+		p:first-child {
+			margin-top: 0;
+		}
+	}
+	.submit.loading {
+		background-image: image_url('loading_small.gif');
+		background-position: 5px center;
+		padding-left: 26px
+	}	
+	/*
+	Each input in separate row
+	*/
+	.row { margin: 10px 0; }
+
+	/*
+	Don't display radio buttons. IE won't accept hidden
+	inputs so instead we position the radio buttons off
+	screen.
+	*/
+	input.rating {
+		position: absolute;
+		left: -3000px;
+	}
+
+	/* 
+	Make unselected ratings gray
+	*/
+	.rating {
+		color: #101010;
+		text-shadow: #D7D7D7 2px 2px;
+		// not sure why this won't work
+		filter: dropshadow(color=#d7d7d7,offX=2,offY=2, positive=2);
+		font-size: 24px;
+		cursor: pointer;
+		margin-right: 10px;
+		display: inline;
+	}
+
+	/*
+	Place submit button in the bottom right corner
+	*/
+	input.submit {
+		height: 40px;
+		font-weight: bold;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+}
+
+/*
+Allow the user to share review to twitter and facebook
+*/
+input.share {
+	display: none;
+}
+
+/*
+Internet explorer needs checkbox to be visible
+*/
+.ie input.share {
+	display: block;
+	position: absolute;
+	left: -3000px;
+}
+
+span.share-msg {
+	display: block;
+	float: left;
+	line-height: 40px;
+	margin-right: 5px;
+}
+
+label.share {
+	display: block;
+	float: left;
+	cursor: pointer;
+	margin-right: 5px;
+	@include border-radius(5px);
+
+	/*
+	Icon for Twitter and facebook within label
+	*/
+	span {
+		display: block;
+		text-indent: -3000px;
+		background-position: center center;
+		width: 38px;
+		height: 38px;
+	}
+}
+
+/*
+Gray out when unchecked
+*/
+label.share {
+	border: 1px solid black;
+	@include linear-gradient(#bdbdbd,#979797);
+
+}
+
+.share.twitter span {
+	background: transparent url(image_path('static/twitter-identity-provider-icon.png')) no-repeat center center;
+}
+.share.twitter:checked + label {
+	@include twitter;
+}
+.ie .share.twitter.selected {
+	@include twitter;
+}
+.share.facebook span {
+	background: transparent url(image_path('static/facebook-identity-provider-icon.png')) no-repeat center center;
+}
+.share.facebook:checked + label {
+	@include facebook;
+}
+.ie .share.facebook.selected {
+	@include facebook;
+}
+
+
+/*
+User clicks finished button if the game was completed
+*/
+input.finished {
+	display: none;
+}
+
+/*
+In order to use the checkbox in IE8 it must be visible on the screen
+*/
+.ie input.finished {
+	display: block;
+	position: absolute;
+	left: -3000px;
+}
+
+label.finished {
+	font-weight: normal;
+	height: 16px;
+	line-height: 16px;
+	cursor: pointer;
+	display: block;
+	float: left;
+	padding-left: $space-large;
+	background: transparent url(image_path('static/completed.png')) no-repeat 0 0;
+}
+.finished:checked + label {
+	background: transparent url(image_path('static/completed.png')) no-repeat 0 -16px;
+}
+
+/*
+Internet Explorer need some help with identifying label of
+selected checkbox
+*/
+.ie .finished.selected {
+	background: transparent url(image_path('static/completed.png')) no-repeat 0 -16px;
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end NEW_REVIEW plugin */

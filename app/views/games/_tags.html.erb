@@ -1,0 +1,40 @@
+<div class="tags">
+
+	<% if !tags.platforms.empty? %>
+	<em>Platform:</em>
+	<% tags.platforms.each do |tag| %>
+		<%#= tag_link(tag, :title => tag.description) %>
+		<span class="tag-link" title="<%= tag.description %>"><%= tag.name %></span>
+	<% end %>
+	<% end %>
+
+
+	<% if !tags.genres.empty? %>
+	<em>Genre:</em>
+	<% tags.genres.each do |tag| %>
+		<%# tag_link(tag, :title => tag.description) %>
+		<span class="tag-link" title="<%= tag.description %>"><%= tag.name %></span>
+	<% end %>
+	<% end %>
+
+
+	<% if !tags.developers.empty? %>
+	<em>Developers:</em>
+	<% tags.developers.each do |tag| %>
+		<%# tag_link(tag, :title => tag.description)	%>
+		<span class="tag-link" title="<%= tag.description %>"><%= tag.name %></span>
+	<% end %>
+	<% end %>
+
+	<% if !tags.publishers.empty? %>
+	<em>Publishers:</em>
+	<% tags.publishers.each do |tag| %>
+	<%# tag_link(tag, :title => tag.description)	%>
+		<span class="tag-link" title="<%= tag.description %>"><%= tag.name %></span>
+	<% end %>
+	<% end %>
+
+	<% if tags.released %>
+	<em>Released:</em> <time class="released" datetime="<%= tags.released.xmlschema %>"><%= tags.released.strftime '%Y' %></time>
+	<% end %>
+</div>

@@ -1,0 +1,7 @@
+<!-- START: Search form -->
+<%= form_tag("/search", :method => 'get', :id => 'search') do %>
+  <%= label_tag(:q, "", 'data-icon' => 'z') %>
+	<%= text_field_tag(:q, '', :autocomplete => 'off') %>
+	<%= submit_tag("Search") %>
+<% end %>
+<!-- END: Search form -->

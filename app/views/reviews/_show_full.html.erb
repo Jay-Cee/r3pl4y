@@ -1,0 +1,35 @@
+<article class="review full">
+
+<!-- Game to be reviewed -->
+<div class="game">
+	<%= link_to(show_full.game, :class => 'game-link') do %>
+		<img class="game-cover" src="<%= show_full.game.thumbnail.url(:medium) %>" alt="<%= show_full.game.title %> thumbnail" />
+		<span class="game-title"><%=show_full.game.title %></span>
+
+	<% end %>
+</div>
+
+<span>
+	<%= link_to(show_full.user, :class => 'user-link') do %>
+		<span class="user-name"><%= show_full.user.name %></span>
+	<% end %>
+</span>
+
+<!-- When this was published -->
+<time datetime="<%= show_full.published.xmlschema %>">
+		<%= link_to show_full.published_from(Time.now), user_review_path(show_full.user, show_full)  %>
+</time>
+
+<% if show_full.finished? then %>
+	<span class="star" title="Completed the game">Completed the game</span>
+<% end %>
+
+<div class="review-body">
+	<%= markdown(show_full.review) %>
+</div>
+
+<% if show_full.rating %>
+<em>My rating:</em> <span class="rating rating-<%= show_full.rating %>"><%= show_full.rating %></span>
+<% end %>
+<div class="clear"></div>
+</article>

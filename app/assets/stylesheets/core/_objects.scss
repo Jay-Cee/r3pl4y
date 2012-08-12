@@ -1,0 +1,238 @@
+//  -----------------------------------------------------------------
+//  Items
+//  
+//  Common items in this design: links, buttons and such
+//  -----------------------------------------------------------------
+
+    // room for $colors, $widths, et cetera
+    // ...
+
+//  -----------------------------------------------------------------
+//  Mixins
+//  -----------------------------------------------------------------
+
+
+// Defines what a header should look like
+@mixin heading {
+	font-size: $fontsize-header;
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+@mixin button($start1, $stop1, $start2, $stop2, $border-color) {
+	@extend .blocklink;
+	@include border-radius(10px);
+	padding: 10px;
+	text-align: center;
+	color: white;
+	text-transform: capitalize;
+
+	background: $start2; /* Old browsers */
+
+
+	background: -moz-linear-gradient(top, $start1 0%, $stop1 50%, $start2 51%, $stop2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$start1), color-stop(50%,$stop1), color-stop(51%,$start2), color-stop(100%,$stop2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, $start1 0%,$stop1 50%,$start2 51%,$stop2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, $start1 0%,$stop1 50%,$start2 51%,$stop2 100%); /* Opera 11.10+ */
+	background: linear-gradient(top, $start1 0%,$stop1 50%,$start2 51%,$stop2 100%); /* W3C */
+	border: 1px solid $border-color;
+	text-shadow: 0px 2px $border-color;
+}
+
+@mixin big-button {
+  @extend .blocklink;
+  background-color: $btnFallback;
+  color: $becomeMemberColor;
+  padding: 0 21px;
+  border: 1px solid $becomeMemberBorderColor;
+  text-transform: uppercase;
+  font: bold 0.89125em/40px $fontface; /* 14.37 / 16 */
+  @include border-radius(20px);
+  @include box-shadow(1px 3px 0 rgba(0, 0, 0, .1));
+  @include background-image(
+              linear-gradient($btnGradientStart, 
+              $btnGradient10 6%, 
+              $btnGradient90 93%, 
+              $btnGradientEnd));
+  
+  &:hover, &:focus {
+    background-color: $btnFallback + #080808;
+    @include background-image(
+              linear-gradient($btnGradientStart + #080808, 
+              $btnGradient10 + #080808 6%, 
+              $btnGradient90 + #080808 93%, 
+              $btnGradientEnd + #080808));
+  }
+  
+  &:active {
+    @extend .rel;
+    top: 3px;
+    left: 1px;
+    @include background-image(
+              linear-gradient($btnGradientStart - #080808, 
+              $btnGradient10 - #080808 6%, 
+              $btnGradient90 - #080808 93%, 
+              $btnGradientEnd - #080808));
+    @include box-shadow(none);
+  }
+}
+
+//  -----------------------------------------------------------------
+//  Objects
+//  -----------------------------------------------------------------
+
+// r3pl4y style
+.r3pl4y {
+	font-family: emulogic, Terminal;
+	color: $color-highlight;
+	text-transform: uppercase;
+	text-shadow: #AFAFB1 1px 1px;
+}
+
+[data-icon]:before {
+  font-family: fico;
+  content: attr(data-icon);
+  speak: none;
+}
+
+/*
+Message from the system to the user
+*/
+.notice, .alert {
+	position: relative;
+	display: block;
+	padding: 10px 10px 10px 28px;
+	margin: $space !important;
+
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+
+	border: 2px solid black;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+.notice {
+	background: lightgreen image_url('static/ok.png') no-repeat 10px 10px;
+	border-color: darkgreen;
+}
+.alert {
+	background: red image_url('static/error.png') no-repeat 10px 10px;
+	border-color: darkred;
+}
+
+.blocklink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/*
+A link that lets you display rest of an article
+*/
+.read-more {
+	margin-left: 10px;
+	font-size: 0.75em;
+	color: #ED00CB;
+}
+
+/*
+Display as a button
+*/
+.button {
+	@include heading;
+	padding: 5px;
+}
+
+.green-button {
+  @include button(rgb(157,213,58), rgb(161,213,79),rgb(128,194,23), rgb(124,188,10), darkgreen);
+}
+
+.red-button {
+  @include button(rgb(248,80,50), rgb(241,111,92), rgb(246,41,12), rgb(231,56,39), darkred);
+}
+
+// identity provider for sign_in and connect
+.provider {
+	display: block;
+	margin-bottom: $space;
+	font-size: $fontsize-small;
+	color: white;
+	padding: $space;
+	@include border-radius($space-small);
+
+	span {
+		padding-left: 48px;
+		font-size: 16px;
+	}
+}
+
+.twitter {
+	background-color: #1BB7E7;
+	border: 1px solid #127B9B;
+	text-shadow: #127B9B 0px -1px 0px;
+	@include linear-gradient(#1BB7E7, #029AC9);
+	
+	span {
+		background: transparent url(image_path('static/twitter-identity-provider-icon.png')) no-repeat center left;
+	}
+}
+
+.facebook {
+	background-color: #395484;
+	border: 1px solid #3B6597;
+	text-shadow: #3B6597 0px -1px 0px;
+	@include linear-gradient(#6291C7, #5681B0);
+
+	span {
+		background: transparent url(image_path('static/facebook-identity-provider-icon.png')) no-repeat center left;
+	}
+}
+
+.steam {
+	background-color: #7DB237;
+	border: 1px solid #898B8C;
+	text-shadow: #898B8C 0px -1px 0px;
+	@include linear-gradient(#7DB237, #5D8428);
+
+	span {
+		background: transparent url(image_path('static/steam-identity-provider-icon.png')) no-repeat center left;
+	}
+}
+
+/*
+Display while user is waiting
+*/
+.loading {
+	background: transparent image_url('loading.gif') no-repeat center center;
+	text-align: center;
+	min-height: 32px + $space;
+}
+
+/*
+Place a fade to black gradient on parent element
+*/
+.gradient {
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	max-height: 600px; // height of the background image
+	background-color: black;
+	z-index: 1 !important;
+
+	background: -moz-linear-gradient(top, rgba(0,0,0,0.6) 0%, 	rgba(0,0,0,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear,	 left top, left bottom, color-stop(0%,rgba(0,0,0,0.6)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.6) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(0,0,0,0.6) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(0,0,0,0.6) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(0,0,0,0.6) 0%,rgba(0,0,0,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+// clear floating
+.clear {
+    clear: both;
+}

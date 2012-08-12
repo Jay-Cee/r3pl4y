@@ -1,0 +1,5 @@
+<% @content['response']['posts'].each do |post| %>
+<h3><%= link_to(post['title'], post['post_url']) %></h3>
+<time datetime="<%= Time.at(post['timestamp']).utc.xmlschema %>"><%= post['date'] %></time>
+<%= post['body'].html_safe %>
+<% end %>

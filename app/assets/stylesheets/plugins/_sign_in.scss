@@ -1,0 +1,40 @@
+/* @group SIGN_IN plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+.sign_in {
+	@include white-box;
+}
+
+.identity-providers {
+
+	// delimiter between providers --- or ---
+	.or {
+		text-align: center;
+		font-style: italic;
+		font-size: $fontsize-small;
+		color: $color-inactivetext;
+		margin-bottom: $space;
+		background: transparent url(image_path('static/vertical-line.png')) repeat-x center left;
+
+		span {
+			background: white;
+			padding-left: $space;
+			padding-right: $space;
+		}
+	}
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+/* @end SIGN_IN plugin */

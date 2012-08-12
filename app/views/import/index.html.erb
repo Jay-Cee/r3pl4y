@@ -1,0 +1,13 @@
+<h2>Import games</h2>
+<p>Import CSV file, with format:</p>
+<pre>id,title,genre,released,developer,publisher,platform,description,thumbnail,background,ignore</pre>
+<%= form_tag({ :action => 'perform'}, :multipart => true) do %>
+  <%= label_tag 'import_platform' %>
+  <%= select_tag "import_platform", options_for_select(@platforms_list, nil), :multiple => false %>
+
+  <%= label_tag 'import_file' %>
+  <%= file_field_tag 'import_file' %>
+
+  <%= submit_tag 'Import' %>
+<% end %>
+

@@ -1,0 +1,26 @@
+My last publish was very premature and unplanned. I hope this one will meet your standards.
+
+R3PL4Y.com is a website under development where you as a user should be able to review games in your collection to keep track of games played and what you thought of them. You will see statistics over your reviews and get suggestions of games you might enjoy.
+
+R3PL4Y.com is currently under ALPHA stage in development, and we're looking forward to a BETA release 15 May 2012. That is when we will start inviting users to test our functionality.
+
+Try out the Facebook action implementation through the following steps.
+1. Go to the following invite URL to create a new account
+http://www.r3pl4y.com/users/Rubriks/invite/power-up
+> Press the link, Sign in with Facebook
+
+2. An account will be created for you and you will be
+redirected to Profile page (see /profile in url)
+
+3. Please go to a Game page. (search is not yet implemented)
+> http://www.r3pl4y.com/games/speedball
+> http://www.r3pl4y.com/games/great-giana-sisters
+> http://www.r3pl4y.com/games/ports-of-call
+> http://www.r3pl4y.com/games/benefactor
+
+4. To the left of the game presentation you should select your intended rating. 1UP-5UP
+5. Write a review. "I loved this game because..."
+6. Press the star if you completed the game. (not represented in the Facebook Action)
+7. Press the Share to: [F] symbol to share review to Facebook Open Graph.
+8. Press Submit when you're done.
+9. Your review will be published to the site and pushed to Facebook Open Graph.

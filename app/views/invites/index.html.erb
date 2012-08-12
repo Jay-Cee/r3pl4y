@@ -1,0 +1,23 @@
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>E-mail</th>
+			<th>Hash</th>
+			<th>user.id</th>
+			<th colspan="2">Links</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @invites.each do |invite| %>
+			<tr>
+				<td><%= invite.id %></td>
+				<td><%= invite.email %></td>
+				<td><%= invite.hash %></td>
+				<td><%= invite.user_id %></td>
+				<td>Send</td>
+				<td>Delete</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home - Replay</title>
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/colorbox.css" />
+		<script src="js/jquery-1.7.1.js"></script>
+		<script src="js/jquery.colorbox-min.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body class="home">
+
+	<!-- Main header -->
+	<header class="top">
+		<div>
+			<img src="img/static/icon.png" alt="replay logotype" id="logotype" />
+			<h1><a href="/">R3pl4y</a></h1>
+			<form id="search" target="search" method="get" class="search">
+				<input type="text" name="q" class="query" value="Search game..." />
+				<input type="button" class="button" />
+			</form>
+			<nav class="top">
+				<ul class="horizontal">
+					<li class="active">
+						<a href="#home">Home</a>
+					</li>
+					<li>
+						<a href="#profile">Profile</a>
+					</li>
+					<li>
+						<a href="#lists">Lists</a>
+					</li>
+				</ul>
+			</nav>
+		<div>
+	</header>	
+		
+	<div id="container">
+
+		<!-- Feeds -->
+		<section id="main">
+			<header>
+				<div class="center">
+				<h2>Hello, Mikael Lundin</h2>
+				<div class="status">
+					<span class="number-of-reviews">
+						<em>Reviews</em>: <a class="highlight" href="#">230</a>
+					</span>
+					<span class="wish-list">
+						<em>Wishes</em>: <a class="highlight" href="#">7</a>
+					</span>
+					<span class="badges">
+						<em>Badges</em>: <a class="highlight" href="#">12</a>
+					</span>
+				</div>
+				<p class="last-review">
+					<em>1 Hour Ago</em>: <span class="highlight">Red Dead Redemption</span> 
+					Well made game. It was like GTA on horseback ... 
+					<span class="rating rating-3">3</span>
+				</p>
+
+
+				<!-- Tabs -->
+				<nav class="tabs">
+					<ul>
+						<li class="active first">
+							<a href="#timeline">Timeline</a>
+						</li>
+						<li>
+							<a href="#you">You</a>
+						</li>
+						<li>
+							<a href="#wish">Wish List</a>
+						</li>
+						<li>
+							<a href="#badges">Badges</a>
+						</li>
+					</ul>
+				</nav>
+				</div>
+			</header>
+
+			<div class="white">
+		   <div class="center width">	
+			<!-- Timeline -->
+			<section id="timeline" class="active center">
+
+			<!-- Review -->
+			<article itemscope itemtype="http://schema.org/Review" class="review first">
+				<!-- Game to be reviewed -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/bastion/thumbnail.png" class="thumbnail" />					
+					<a itemprop="url" href="game/bastion.html" class="game-preview">
+						<h3 itemprop="name" class="name">Bastion</h3>
+					</a>
+				</div>
+				
+				<!-- Reviewed by -->
+				<div itemscope itemtype="http://schema.org/Person" itemprop="author" class="user">
+					<img itemprop="image" src="img/user/jonashenriksson/profile.png" />
+					<a itemprop="url" href="user/jonashenriksson.html" class="user-preview">
+						<span itemprop="name" class="name">Bad Ass Evil</span>
+					</a>
+				</div>
+
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">30 minutes ago</time>
+
+				<div itemprop="reviewBody" class="body">
+					<p>
+					Bastion was a great game and I hoped that it would last a bit longer. Sadly
+					I never got to see the end because of a bug that happens on Radeon graphics
+					cards.
+					</p>
+				</div>
+				<span itemprop="reviewRating" class="rating rating-3">3</span>
+			</article>
+
+
+			<!-- Review -->
+			<article itemscope itemtype="http://schema.org/Review" class="review">
+				<!-- Game to be reviewed -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/supermeatboy/thumbnail.png" class="thumbnail" />					
+					<a itemprop="url" href="game/supermeatboy.html" class="game-preview">
+						<h3 itemprop="name" class="name">Super Meat Boy</h3>
+					</a>
+				</div>
+				
+				<!-- Reviewed by -->
+				<div itemscope itemtype="http://schema.org/Person" itemprop="author" class="user">
+					<img itemprop="image" src="img/user/jesperlundberg/profile.png" />
+					<a itemprop="url" href="/user/jesperlundberg.html" class="user-preview">
+						<span itemprop="name" class="name">Whettingstone</span>
+					</a>
+				</div>
+
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">41 minutes ago</time>
+
+				<div itemprop="reviewBody" class="body">
+					<p>
+					So fun and so great. You just die die die and die again. Exception is that
+					you'll enjoy it in this game.
+					</p>
+				</div>
+				<span itemprop="reviewRating" class="rating rating-5">5</span>
+			</article>
+
+
+			<!-- Review -->
+			<article itemscope itemtype="http://schema.org/Review" class="review">
+				<!-- Game to be reviewed -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/reddeadredemption/thumbnail.png" class="thumbnail" />					
+					<a itemprop="url" href="game/reddeadredemption.html" class="game-preview">
+						<h3 itemprop="name" class="name">Red Dead Redemption</h3>
+					</a>
+				</div>
+				
+				<!-- Reviewed by -->
+				<div itemscope itemtype="http://schema.org/Person" itemprop="author" class="user">
+					<img itemprop="image" src="img/user/mikaellundin/profile.png" />
+					<a itemprop="url" href="/user/mikaellundin.html" class="user-preview">
+						<span itemprop="name" class="name">Excelsior</span>
+					</a>
+				</div>
+
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">1 hour ago</time>
+
+				<div itemprop="reviewBody" class="body">
+					<p>
+					Well made game. It's like GTA on horseback. Lots of minigames and things to
+					do in New Austin. I would love the game to be a bit shorter. Sometimes it
+					felt like you couldn't get it to end.
+					</p>
+				</div>
+				<span itemprop="reviewRating" class="rating rating-3">3</span>
+			</article>
+
+			<!-- Review -->
+			<article itemscope itemtype="http://schema.org/Review" class="review">
+				<!-- Game to be reviewed -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/lanoire/thumbnail.png" class="thumbnail" />					
+					<a itemprop="url" href="game/lanoire">
+						<h3 itemprop="name" class="name">L.A. Noire</h3>
+					</a>
+				</div>
+				
+				<!-- Reviewed by -->
+				<div itemscope itemtype="http://schema.org/Person" itemprop="author" class="user">
+					<img itemprop="image" src="img/user/mikaellundin/profile.png" />
+					<a itemprop="url" href="/user/mikaellundin.html" class="user-preview">
+						<span itemprop="name" class="name">Excelsior</span>
+					</a>
+				</div>
+
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">11:23</time>
+
+				<div itemprop="reviewBody" class="body">
+					<p>
+					Too single tracked and simple. I didn't enjoy this game at all and wanted
+					it just to be over.
+					</p>
+				</div>
+				<span itemprop="reviewRating" class="rating rating-2">2</span>
+			</article>
+
+			<!-- Review -->
+			<article itemscope itemtype="http://schema.org/Review" class="review">
+				<!-- Game to be reviewed -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/braid/thumbnail.png" class="thumbnail" />					
+					<a itemprop="url" href="game/braid">
+						<h3 itemprop="name" class="name">Braid</h3>
+					</a>
+				</div>
+				
+				<!-- Reviewed by -->
+				<div itemscope itemtype="http://schema.org/Person" itemprop="author" class="user">
+					<img itemprop="image" src="img/user/jonashenriksson/profile.png" />
+					<a itemprop="url" href="/user/jonashenriksson.html" class="user-preview">
+						<span itemprop="name" class="name">Bad Ass Evil</span>
+					</a>
+				</div>
+
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">22:32, 1 December 2011</time>
+
+				<div itemprop="reviewBody" class="body">
+					<p>
+					Really fun puzzle adventure, but the ending was so strange. I have no idea
+					what it really meant.
+					</p>
+				</div>
+				<span itemprop="reviewRating" class="rating rating-4">4</span>
+			</article>
+			</section>
+
+			<!-- You -->
+			<section id="you">
+			<!-- Review -->
+			<article itemscope itemtype="http://schema.org/Review" class="review">
+				<!-- Game to be reviewed -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/reddeadredemption/thumbnail.png" class="thumbnail" />					
+					<a itemprop="url" href="game/reddeadredemption.html" class="game-preview">
+						<h3 itemprop="name" class="name">Red Dead Redemption</h3>
+					</a>
+				</div>
+				
+				<!-- Reviewed by -->
+				<div itemscope itemtype="http://schema.org/Person" itemprop="author" class="user">
+					<img itemprop="image" src="img/user/mikaellundin/profile.png" />
+					<a itemprop="url" href="/user/mikaellundin.html" class="user-preview">
+						<span itemprop="name" class="name">Excelsior</span>
+					</a>
+				</div>
+
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">1 hour ago</time>
+
+				<div itemprop="reviewBody" class="body">
+					<p>
+					Well made game. It's like GTA on horseback. Lots of minigames and things to
+					do in New Austin. I would love the game to be a bit shorter. Sometimes it
+					felt like you couldn't get it to end.
+					</p>
+				</div>
+				<span itemprop="reviewRating" class="rating rating-3">3</span>
+			</article>
+
+			<!-- Review -->
+			<article itemscope itemtype="http://schema.org/Review" class="review">
+				<!-- Game to be reviewed -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/lanoire/thumbnail.png" class="thumbnail" />					
+					<a itemprop="url" href="game/lanoire">
+						<h3 itemprop="name" class="name">L.A. Noire</h3>
+					</a>
+				</div>
+				
+				<!-- Reviewed by -->
+				<div itemscope itemtype="http://schema.org/Person" itemprop="author" class="user">
+					<img itemprop="image" src="img/user/mikaellundin/profile.png" />
+					<a itemprop="url" href="/user/mikaellundin.html" class="user-preview">
+						<span itemprop="name" class="name">Excelsior</span>
+					</a>
+				</div>
+
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">11:23</time>
+
+				<div itemprop="reviewBody" class="body">
+					<p>
+					Too single tracked and simple. I didn't enjoy this game at all and wanted
+					it just to be over.
+					</p>
+				</div>
+				<span itemprop="reviewRating" class="rating rating-2">2</span>
+			</article>
+			</section>
+
+			<!-- Wish List -->
+			<section id="wish">
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/uncharted3drakesdeception/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/uncharted3drakesdeception">
+						<h3 itemprop="name" class="name">Uncharted 3: Drake's Deception</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">23 December, 22:01</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="cdon">CDON.com</span> for only 499 SEK
+					</a>
+				</p>
+			</article>
+
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/alicemadnessreturns/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/alicemadnessreturns">
+						<h3 itemprop="name" class="name">Alice: Madness Returns</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">23 December, 21:58</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="cdon">CDON.com</span> for only 369 SEK
+					</a>
+				</p>
+			</article>
+
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/theelderscrollsvskyrim/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/theelderscrollsvskyrim">
+						<h3 itemprop="name" class="name">The Elder Scrolls V: Skyrim</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">23 December, 21:45</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="steam">Steam</span> for only 49.95&euro;
+					</a>
+				</p>
+			</article>
+
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/darksouls/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/darksouls">
+						<h3 itemprop="name" class="name">Dark Souls</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">23 December, 20:23</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="amazon">Amazon</span> for only 19.95&dollar;
+					</a>
+				</p>
+			</article>
+
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/raymanorigins/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/raymanorigins">
+						<h3 itemprop="name" class="name">Rayman: Origins</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">21 December, 08:23</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="CDON.com">CDON.com</span> for only 599 SEK
+					</a>
+				</p>
+			</article>
+
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/alanwake/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/alanwake">
+						<h3 itemprop="name" class="name">Alan Wake</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">21 December, 08:23</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="CDON.com">CDON.com</span> for only 599 SEK
+					</a>
+				</p>
+			</article>
+
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/torchlight/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/torchlight">
+						<h3 itemprop="name" class="name">Torchlight</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">21 December, 08:23</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="CDON.com">CDON.com</span> for only 599 SEK
+					</a>
+				</p>
+			</article>
+			
+			<!-- Wish Item -->
+			<article class="wish-item">
+				<!-- Game -->
+				<div itemscope itemtype="http://schema.org/Thing" itemprop="itemReviewed" class="game">
+					<img itemprop="image" src="img/game/bioshock/thumbnail.png" class="thumbnail" />		
+					<a itemprop="url" href="game/bioshock">
+						<h3 itemprop="name" class="name">BioShock</h3>
+					</a>
+				</div>
+				
+				<!-- When this was published -->
+				<time itemprop="dateCreated" datetime="2011-05-08T19:30">21 December, 08:23</time>
+
+				<!-- Link -->
+				<p class="body">
+					<a class="buy" href="#steam">
+						Buy this on <span class="CDON.com">CDON.com</span> for only 599 SEK
+					</a>
+				</p>
+			</article>		
+			</section>
+
+			<!-- Badges -->
+			<section id="badges">
+			</section>
+
+
+		<!-- Right navigation -->
+		<aside>
+			<div id="profile">
+			<h3>Friends</h3>
+			(<span class="value">2</span>)
+			<ul class="friends horizontal">
+				<li>
+					<a href="user/jesperlundberg.html" class="user-preview">
+						<img src="img/user/jesperlundberg/profile.png" alt="Whettingstone" title="Whettingstone" />
+					</a>
+				</li>
+				<li>
+					<a href="user/jonashenriksson.html" class="user-preview">
+						<img src="img/user/jonashenriksson/profile.png" alt="Bad Ass Evil" title="Bad Ass Evil" />
+					</a>
+				</li>
+			</ul>
+			<p class="small clear">
+				Invite your <a href="http://www.facebook.com">friends to join Replay</a> or <a href="http://www.twitter.com">Tweet</a> about it.
+			</p>
+			<hr />
+			<h3>Trends</h3>
+			<ul id="trends" class="vertical">
+				<li>
+					<a href="game/bastion.html" class="game-preview">Bastion</a>
+				</li>
+				<li>
+					<a href="game/supermeatboy.html" class="game-preview">Super Meat Boy</a>
+				</li>
+				<li>
+					<a href="game/skyrim">Skyrim</a>
+				</li>
+				<li>
+					<a href="game/maxpayne2">Max Payne 2</a>
+				</li>
+				<li>
+					<a href="game/braid">Braid</a>
+				</li>
+				<li>
+					<a href="game/batmanarkhamasylm">Batman: Arkham Asylm</a>
+				</li>
+				<li>
+					<a href="game/cavestory">Cave Story</a>
+				</li>
+				<li>
+					<a href="game/limbo">Limbo</a>
+				</li>
+				<li>
+					<a href="game/grimfandango">Grim Fandango</a>
+				</li>
+				<li>
+					<a href="game/escapefrommonkeyisland">Escape From Monkey Island</a>
+				</li>
+			</ul>
+			<hr />
+			<p class="small">
+				<ul id="links" class="horizontal">
+					<li><a href="about.html">About</a></li>
+					<li><a href="blog">Blog</a></li>
+				</ul>
+				&copy; Rubriks
+			</p>
+			</div>
+
+			<div id="user-preview">
+				<a class="close" href="#">Close</a>
+				<div class="content">
+				</div>
+			</div>
+		</aside>
+
+			<div class="clear">&nbsp;</div>
+			</div>
+			</div>
+		</section>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<%# Game Reviewed %>
+<%= link_to(review.game, :class => 'game-link') do %>
+	<%= image_tag review.game.thumbnail(:medium), :class => 'game-cover' %>
+	<span class="game-title"><%= review.game.title %></span>
+<% end %>
+
+<p class="review-info">
+	<%# Reviewer %>
+	<%= link_to review.user.name, review.user, :class => 'user-link' %>
+
+	<a href="#" class="user-score" title="User Score"><span>37</span></a>
+
+	<%# Time and direct link %>
+	<time class="published" datetime="<%= review.published.xmlschema %>"><%= link_to '', user_review_path(review.user, review), :class => 'review-link' %></time>
+	
+	<% if review.finished %>
+		<span class="star">Completed the game</span>
+	<% end %>
+</p>
+
+<span class="rating rating-<%= review.rating %>"><%= review.rating %></span>

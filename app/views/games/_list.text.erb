@@ -1,0 +1,17 @@
+<% list.each do |game| %>
+<li>	
+	<%= link_to(game, :class => 'game-link') do %>
+		<%= image_tag game.thumbnail(:medium), :class => 'game-cover' %>
+		<span class="game-title"><%= game.title %></span>
+	<% end %>
+
+	<%= render :partial => 'games/tags.html.erb', :object => game %>
+
+	<% if current_user and current_user.has_rated?(game) %>
+	<span class="your-rating rating rating-<%= current_user.last_review_of(game).rating %>"><%= current_user.last_review_of(game).rating %></span>
+
+	<% elsif game.rate_quantity > 4 %>
+	<span class="rating rating-<%= game.discrete_average_rating %>"><%= game.discrete_average_rating %></span>
+	<% end %>
+</li>
+<% end %>

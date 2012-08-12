@@ -1,0 +1,40 @@
+<article style="background-image: url(<%= @game.background.url(:full) %>)" class="game">
+
+<%= link_to(@game, :class => "game-link") do %>
+	<img class="game-cover" src="<%= @game.thumbnail.url(:medium) %>" />
+	<span class="game-title"><%= @game.title %></span>
+<% end %>
+
+	<%= render :partial => 'games/tags.html.erb', :object => @game %>
+
+	<%= markdown(@game.description) %>
+
+	<div class="gradient"></div>
+</article>
+
+<ul id="game-reviews" class="game-list" data-source="<%= url_for(:controller => "games", :action => 'reviews', :slug => @game.slug) %>">
+	<%= render :partial => 'reviews/game_reviews.text.erb', :object => @reviews %>
+</ul>
+
+
+<%# Set the page title %>
+<% content_for :title do %><%= @game.title %><% end %>
+
+<% content_for :rss do %>
+<!-- START: rss -->
+<link rel="alternate" type="application/rss+xml" title="<%= @game.title %> reviews RSS" href="<%= game_url(@game) %>.rss" />
+<!-- END: rss -->
+<% end %>
+
+<% content_for :meta do %>
+<!-- START: Facebook Open Graph -->
+<meta property="fb:app_id"      content="<%= ENV['facebook_app_id'] %>" /> 
+<meta property="og:type"        content="game" /> 
+<meta property="og:url"         content="<%= game_url(@game) %>" /> 
+<meta property="og:title"       content="<%= @game.title %>" /> 
+<meta property="og:description" content="<%= @game.description %>" /> 
+<meta property="og:image"       content="<%= @game.thumbnail.url %>" /> 
+<!-- END: Facebook Open Graph -->
+<% end %>
+
+<% content_for :head_attr do %>prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# game: http://ogp.me/ns/game#"<% end %>

@@ -1,0 +1,11 @@
+<div class="user-status">
+	<div class="reviews">
+		<span class="label">Reviews</span><span class="data"><%= user_status.reviews.length %></span>
+	</div>
+	<%= link_to({ :controller => 'users', :action => 'following_template', :name => user_status.name }, :class => 'following-link') do %>
+		<span class="label">Following</span><span class="data"><%= user_status.following.length %></span>
+	<% end %>
+	<%= link_to({ :controller => 'users', :action => 'followers_template', :name => user_status.name }, :class => 'followers-link') do %>
+			<span class="label">Followers</span><span class="data"><%= user_status.followers.length %></span>
+	<% end %>
+</div>

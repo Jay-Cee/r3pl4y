@@ -1,0 +1,60 @@
+<!-- START: Your review -->
+<div class="new-review">
+	<h2>Review <%= @review.game.title %></h2>
+
+	<%= form_for([current_user, @review]) do |f| %>
+
+		<!-- Reference -->
+		<%= f.hidden_field :game_id, :value => @review.game.id %>
+
+		<!-- Choose Rating -->
+		<div class="row">
+			<% (1..5).each do |i| %>
+				<%= f.radio_button :rating, "#{i}", :class => "rating rating-#{i}" %>
+				<%= f.label :rating, "#{i}", :value => "#{i}", :class => "rating rating-#{i}" %>
+			<% end %>
+		</div>
+			
+		<!-- Write review -->
+		<div class="row compose">
+			<div id="wmd-button-bar"></div>
+      <%= f.text_area :review, :id => 'wmd-input', :class => 'review-text', :rows => '15' %>
+			<%# text_area_tag 'wmd-input', @review.review, :class => 'review-text', :rows => '15' %>
+			<article id="wmd-preview" class="review">
+			</article>
+			<div class="clear"></div>
+		</div>
+
+		<!-- Finished the game -->
+		<div class="row meta">
+			<%= f.check_box :finished, :class => 'finished' %>
+      <%= f.label :finished, 'Completed the game', :class => 'finished'  %>
+			<div class="clear"></div>
+		</div>
+
+		<!-- Share review -->
+		<div class="row">
+			<span class="share-msg">Share to:</span>
+			<% if current_user.twitter_oauth_token and current_user.twitter_oauth_secret %>
+				<%= f.check_box :share_twitter, :class => 'share twitter' %>
+			<% end %>
+			<%= label_tag('review_share_twitter', :class => 'share twitter') do %>
+				<span>Twitter</span>
+			<% end %>
+
+			<% if current_user.facebook_access_token and current_user.facebook_access_token_expires > DateTime.now %>
+				<%= f.check_box :share_facebook, :class => 'share facebook' %>
+			<% end %>
+			<%= label_tag('review_share_facebook', :class => 'share facebook') do %>
+				<span>Facebook</span>
+			<% end %>
+
+			<%= f.submit 'Submit', :class => 'submit' %>
+			<div class="clear"></div>
+		</div>
+
+	<% end %>
+	
+	<div class="clear"></div>
+</div>
+<!-- END: Your review -->

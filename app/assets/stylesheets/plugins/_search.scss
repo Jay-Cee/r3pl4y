@@ -1,0 +1,77 @@
+/* @group SEARCH plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+/*
+Search form
+*/
+#search {
+
+	/*
+	Display as an icon
+	*/
+	label {
+		float: left;
+		width: 30px;
+		height: 29px;
+		margin-right: 25px;
+		color: #BCBCBC;
+		@include heading;
+		text-shadow: $text-dropshadow;
+    line-height: 30px;
+
+    &[data-icon]:before {
+      text-indent: 0px;
+      font-family: fico;
+      font-size: $fontsize-header * 1.5;
+      line-height: auto;
+      content: attr(data-icon);
+      speak: none;
+      padding-right: $space-small;
+      text-transform: none;
+    }
+	}
+	label:hover {
+    color: #F0F0F0;
+		cursor: pointer;
+	}
+
+	input[name=q] {
+		height: 28px;
+		border: 1px solid black;
+		background-color: #444444;
+		width: 183px; // 300 - 2 * 20(padding) - 30(label) - 25(margin-left) - 2(border) - 20(internal padding)
+		padding: 0 10px;
+		color: $color-inactivetext;
+		@include border-radius(5px);
+		font-size: 16px;
+	}
+	input[name=q]:focus {
+		outline: none;
+		@include box-shadow(0px, 0px, 5px, #444);
+	}
+
+	input[name=commit] {
+		position: absolute;
+		left: -3000px;
+		top: 0;
+	}
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end SEARCH plugin */

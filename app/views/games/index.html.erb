@@ -1,0 +1,37 @@
+<h1>Listing games</h1>
+
+<table style="background-color: white">
+  <tr>
+    <!--<th>Id</th>-->
+    <th>Title</th>
+    <th>Slug</th>
+    <th>Description</th>
+    <th>Released</th>
+		<th>Public</th>
+    <!--<th>Rate average</th>-->
+    <!--<th>Rate quantity</th>-->
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @games.each do |game| %>
+  <tr>
+    <!--<td><%= game.id %></td>-->
+    <td><%= game.title %></td>
+    <td><%= game.slug %></td>
+    <td><%= game.description[0..50] %>..</td>
+    <td><%= game.released.month %>/<%= game.released.year %> </td>
+		<td><%= game.is_public ? '✓' : '' %></td>
+    <!--<td><%= game.rate_average %></td>-->
+    <!--<td><%= game.rate_quantity %></td>-->
+    <td><%= link_to 'Show', game %></td>
+    <td><%= link_to 'Edit', edit_game_path(game) %></td>
+    <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Game', new_game_path %>

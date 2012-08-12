@@ -1,0 +1,33 @@
+<header>
+	<div class="user-info">
+		<%= link_to(@review.user, :class => 'user-link') do %>
+			<%= image_tag @review.user.picture, :class => 'user-picture' %>
+			<span class="user-name"><%= @review.user.name %></span>
+		<% end %>
+
+		<!-- When this was published -->
+		<time class="published" datetime="<%= @review.published.xmlschema %>"></time>
+
+		<% if @review.finished? then %>
+			<span class="star" title="Finished this game">Completed the game</span>
+		<% end %>
+		
+		<% if @review.rating %>
+			<span class="rating rating-<%= @review.rating %>"><%= @review.rating %></span>
+		<% end %>
+	</div>
+</header>
+
+<article class="review" style="background-image: url(<%= @review.game.background.url(:full) %>)">
+
+	<%= link_to(@review.game, :class => "game-link") do %>
+		<img class="game-cover" src="<%= @review.game.thumbnail.url(:medium) %>" />
+		<span class="game-title"><%= @review.game.title %></span>
+	<% end %>
+
+	<div class="review-body">
+		<%= markdown(@review.review) %>
+	</div>
+
+	<div class="gradient"></div>
+</article>

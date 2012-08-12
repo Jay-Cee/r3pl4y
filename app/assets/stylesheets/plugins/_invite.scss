@@ -1,0 +1,39 @@
+/* @group INVITE plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+/*
+Link to invite another user
+*/
+.invite-link {
+	line-height: 30px;
+	height: 30px;
+	display: block;
+	@include heading;
+	text-shadow: 0px 1px $color-inactivetext;
+
+  &[data-icon]:before {
+    font-family: fico;
+    content: attr(data-icon);
+    speak: none;
+    text-transform: none;
+    padding: $space;
+    color: orange;
+  }
+}
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end INVITE plugin */

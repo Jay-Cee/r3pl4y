@@ -1,0 +1,11 @@
+<div class="user-info">
+	<%= link_to(user_info, :class => 'user-link') do %>
+		<%= image_tag user_info.picture, :class => 'user-picture' %>
+		<span class="user-name"><%= user_info.name %></span>
+	<% end %>
+	
+	<%# User Score %>
+	<%= render :partial => 'users/score.html.erb', :object => user_info %>
+
+	<div class="clear"></div>
+</div>

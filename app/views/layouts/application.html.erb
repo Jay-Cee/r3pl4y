@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+  ___ _______ _   _ ___   __
+ | _ \__ / _ \ | | | \ \ / /
+ |   /|_ \  _/ |_|_  _\ V / 
+ |_|_\___/_| |____||_| |_|
+ 
+ Thank you for reading our source.
+-->
+<%= ie_conditional_tag :html %>
+<head <%= yield :head_attr %>>
+  <title><%= content_for?(:title) ? content_for(:title) : 'Game Reviews' %> - R3PL4Y</title>
+  <%= stylesheet_link_tag    "application" %>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+	
+  <!-- Set utf-8 encoding -->
+  <meta charset="utf-8" />
+
+	<!-- Set viewport for mobile browsers -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  
+  	<!-- Run in fullscreen on iOS -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+
+	<!-- Use cleartype in Mobile Internet Explorer -->
+	<meta http-equiv="cleartype" content="on">
+
+	<%= yield :meta %>
+
+	<!-- Home screen icon -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_path('static/icon_114.png') %>">
+	<!-- For the iPhone 4 with high-resolution Retina Display -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path('static/icon_77.png') %>">
+	<!-- For the first-generation iPad -->
+	<link rel="apple-touch-icon-precomposed" href="<%= image_path('static/logo.png') %>">
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices -->
+	<link rel="shortcut icon" href="<%= image_path('static/logo.png') %>">
+
+	<%= yield :rss %>
+	<%= render :partial => 'layouts/ga' if Rails.env == 'production' %>
+</head>
+<body class="<%= body_classes.join(' ') %> <%= params[:action] %>">
+
+	<!-- START: Main Header -->
+	<header class="top">
+		<%= image_tag image_path("logo.png"), :class => 'logo' %>
+		<h1 class="main-heading"><a href="/" title="Home">R3pl4y</a></h1>
+		<%# render 'layouts/search' %>
+	</header>
+	<!-- END: Main Header -->
+
+	<!-- START: Main Section -->
+	<section class="main"> 
+		<%= yield :header %>
+		<div id="content">
+			<%= render 'layouts/notice' %>
+			<%= yield %>
+		</div>
+	</section>
+	<!-- END: Main Section -->
+
+	<%= yield :aside %>
+</body>
+</html>

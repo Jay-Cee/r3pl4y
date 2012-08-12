@@ -1,0 +1,37 @@
+<header class="game-actions">
+	<div class="game-info">
+  <%= link_to('Review this game', { :controller => 'reviews', :action => 'new', :game_id => @game.id }, { :class => 'review-button button', 'data-icon' => '✎' }) %>
+
+	<% if @game.rate_quantity > 4 then %>
+		<span class="rating rating-<%= @game.discrete_average_rating %>" title="Based on <%= @game.rate_quantity %> reviews"><%= @game.discrete_average_rating %></span>
+	<% end %>
+	</div>
+</header>
+
+<article style="background-image: url(<%= @game.background.url(:full) %>)" class="game">
+
+	<img class="game-cover" src="<%= @game.thumbnail.url(:medium) %>" />
+	<span class="game-title"><%= @game.title %></span>
+
+	<%= render :partial => 'games/tags.html.erb', :object => @game %>
+
+	<%= markdown(@game.description) %>
+
+	<div class="gradient"></div>
+</article>
+
+<%# ADMIN PANEL %>
+<% if current_user.role == 'admin' then %>
+<div class="admin">
+	<%= link_to('Edit', { :action => 'edit', :id => @game.slug }, { :class => 'edit-action' }) %>
+	<%= link_to 'Destroy', game_path(@game), :confirm => 'Are you sure?', :method => 'delete', :class => 'delete-action' %>
+	
+	<h3>Possible duplicates</h3>
+	<ul class="duplicates-list" data-source="<%= url_for(:action => 'duplicates', :slug => @game.slug) %>">
+	</ul>
+</div>
+<% end %>
+
+<ul class="review-list" data-source="<%= url_for(:action => 'reviews', :slug => @game.slug) %>">
+	<!-- Dynamic loading is done from client side -->
+</ul>

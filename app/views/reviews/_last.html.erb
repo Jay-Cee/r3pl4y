@@ -1,0 +1,10 @@
+<% if not last.nil? then %>
+<!-- START: Last review -->
+<p class="last-review">
+		<%= link_to last.published_from(Time.now), [last.user, last] %>: 
+		<%= link_to last.game.title, last.game %>
+		<%= truncate(last.review, :length => 100) %>
+		<span class="rating rating-<%= last.rating %>"><%= last.rating %></span>
+</p>
+<!-- END: Last review -->
+<% end %>

@@ -1,0 +1,14 @@
+<% user_list.each do |user| %>
+	<li>
+		<%= link_to(user, :class => 'user-link') do %>
+			<%= image_tag user.picture, :class => 'user-picture' %>
+			<span class="user-name"><%= user.name %></span>
+		<% end %>
+
+		<%# Render user score %>
+		<%= render :partial => 'score.html.erb', :object => user %>
+
+		<%# Render follow/unfollow button %>
+		<%= render :partial => 'user_follow.html.erb', :object => user %>
+	</li>
+<% end %>

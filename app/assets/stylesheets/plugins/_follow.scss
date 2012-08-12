@@ -1,0 +1,36 @@
+/* @group FOLLOW plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+/*
+Click link to follow person
+*/
+.follow-link {
+	font-size: 18px;
+	display: block;
+	background-color: gray;
+}
+.follow-link.follow {
+  @extend .green-button;
+}
+.follow-link.unfollow {
+  @extend .red-button;
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end FOLLOW plugin */

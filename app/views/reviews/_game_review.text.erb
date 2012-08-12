@@ -1,0 +1,25 @@
+<%# User reviewing %>
+<%= link_to(game_review.user, :class => 'user-link') do %>
+	<%= image_tag game_review.user.picture, :class => 'user-picture' %>
+	<span class="user-name"><%= game_review.user.name %></span>
+<% end %>
+	
+<%# User Score %>
+<%= render :partial => 'users/score.html.erb', :object => game_review.user %>
+
+<%# Time and direct link %>
+<time class="published" datetime="<%= game_review.published.xmlschema %>"><%= link_to '', user_review_path(game_review.user, game_review), :class => 'review-link' %></time>
+
+<%# Display a star if game was completed %>
+<% if game_review.finished %>
+	<span class="star" title="Finished this game">Completed the game</span>
+<% end %>
+
+<%# Review content %>
+<div class="review-body shorten">
+	<%= plain(game_review.review) %>
+</div>
+
+<% if game_review.rating %>
+	<span class="rating rating-<%= game_review.rating %>"><%= game_review.rating %></span>
+<% end %>

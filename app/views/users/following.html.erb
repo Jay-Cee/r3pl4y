@@ -1,0 +1,7 @@
+<%# Set the page title %>
+<% content_for :title do %>Followed by <%= @user.name %><% end %>
+
+<section class="following">
+	<h2>Followed by <%= @user.name %></h2>
+	<%= render :partial => 'userlist', :object => @user.following %>
+</section>

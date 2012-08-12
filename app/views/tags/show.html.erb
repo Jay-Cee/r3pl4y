@@ -1,0 +1,14 @@
+<%# Set the page title %>
+<% content_for :title do %><%= @tag.name %><% end %>
+
+<ul class="game-list" data-source="<%= url_for(:controller => 'tags', :action => 'show', :id => @tag.id) %>">
+    <!-- Dynamically loaded tags -->
+</ul>
+<% content_for :aside do %>
+<aside>
+    <h1><%= @tag.name %></h1>
+    <p class="description">
+        <%= @tag.description %>
+    </p>
+</aside>
+<% end %>

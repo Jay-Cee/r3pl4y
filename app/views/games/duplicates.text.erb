@@ -1,0 +1,13 @@
+<% @duplicates.each do |game| %>
+<li>
+  <%= link_to game_path(game) do %>
+    <%= image_tag game.thumbnail.url(:small), :class => 'game-cover' %>
+    <span class="game-title"><%= game.title %></span>
+  <% end %>
+
+	<%= link_to 'Merge', {:action => 'merge', :slug => @slug, :with => game.slug }, :class => 'merge-button', :confirm => 'Are you sure you want to merge?'  %>
+	<% if not game.is_public then %>
+		<span class="is-public">Not Public</span>
+	<% end %>
+</li>
+<% end %>

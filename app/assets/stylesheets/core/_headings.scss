@@ -1,0 +1,31 @@
+//  -----------------------------------------------------------------
+//  Headings
+//  
+//  Common headings in this design.
+//  -----------------------------------------------------------------
+
+// room for $colors, $widths, et cetera
+// ...
+
+.top {
+	background: transparent image_url('dark_leather.png') repeat-x top left;
+	border-bottom: 1px solid black;
+	height: 40px;
+	padding: $space-large;
+
+	.logo { 
+		height: 40px;
+		margin-right: $space-large;
+		float: left;
+	}
+	.main-heading {
+		@extend .r3pl4y;
+		text-shadow: lighten($color-highlight, 45%) 4px 4px;
+		font-size: 2em;
+		line-height: 40px;
+	}
+}
+
+.aside-heading {
+  
+}

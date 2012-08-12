@@ -1,0 +1,43 @@
+/* @group STATS plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+#stats {
+	background-color: white;
+
+	.user-stats {
+		@include border-radius(10px);
+		padding: $space;
+		border: 1px solid $color-border;
+		width: 438px;
+		margin: $space;
+		background-color: #F7F7F7;
+
+		.label {
+			font-weight: bold;
+		}
+		.label:after {
+			content: ':';
+		}
+	}
+
+	h2 {
+		margin: $space-large $space $space $space;
+	}
+
+	.row {
+		line-height: 1.25em;
+	}
+}
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+/* @end STATS plugin */

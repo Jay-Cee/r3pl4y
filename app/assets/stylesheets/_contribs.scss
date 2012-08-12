@@ -1,0 +1,55 @@
+//  -----------------------------------------------------------------
+//  Code reused from elsewhere, for example HTML5 Boilerplate, 
+//  Snipplr or GitHub Gists.
+//
+//  Considerations:
+//
+//    * Do not forget to include licenses.
+//    * Wrap IE hacks with @if $legacy_browsers == true {   } to
+//      make it possible to disable.
+//
+//  -----------------------------------------------------------------
+
+//  @license Public Domain
+//  @source https://raw.github.com/h5bp/html5-boilerplate/master/css/style.css
+.clearfix { 
+  &:after {
+    content: ""; 
+    display: block; 
+    clear: both;     
+  }
+  
+  @if $legacy_browsers == true { 
+    *zoom: 1; 
+  }
+}
+
+//  @license Public Domain
+//  @source https://raw.github.com/h5bp/html5-boilerplate/master/css/style.css
+.ir { 
+  display: block; 
+  border: 0; 
+  text-indent: -999em; 
+  overflow: hidden; 
+  background-color: transparent; 
+  background-repeat: no-repeat; 
+  text-align: left; 
+  direction: ltr;
+  @if $legacy_browsers == true {  
+    *line-height: 0; 
+  }
+}
+
+
+//  @license Public Domain
+//  @source https://raw.github.com/h5bp/html5-boilerplate/master/css/style.css
+.structural { 
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; 
+  margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute; 
+  width: 1px; 
+}

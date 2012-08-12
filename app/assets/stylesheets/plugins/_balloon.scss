@@ -1,0 +1,44 @@
+/* @group BALLOON plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+/*
+Create a balloon over element
+*/
+.balloon {
+	position: absolute;
+	background-color: black;
+	color: white;
+	font-size: $fontsize-small;
+	padding: $space-small;
+	z-index: 100;
+}
+.balloon:before
+{
+	content: ' ';
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	left: 50%;
+	margin-left: -10px;
+	bottom: -10px;
+	border: 5px solid;
+	border-color: black transparent transparent transparent;
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end BALLOON plugin */

@@ -1,0 +1,52 @@
+<div class="sign_in">
+	<h2>Sign in</h2> 
+	<p>If you're a member, sign in here</p>
+	<ul class="identity-providers">
+		<li>
+			<%= link_to user_omniauth_authorize_path(:twitter), :class => 'provider twitter', :rel => 'nofollow' do %>
+				<span>Sign in with Twitter</span>
+			<% end %>
+		</li>
+		<li>
+			<p class="or"><span>or</span></p>
+		</li>
+		<li>
+			<%= link_to user_omniauth_authorize_path(:facebook), :class => 'provider facebook', :rel => 'nofollow' do %>
+				<span>Sign in with Facebook</span>
+			<% end %>
+		</li>
+		<li>
+			<p class="or"><span>or</span></p>
+		</li>
+		<li>
+			<%= link_to user_omniauth_authorize_path(:steam), :class => 'provider steam', :rel => 'nofollow' do %>
+				<span>Sign in with Steam</span>
+			<% end %>
+		</li>
+	</ul>
+	<p>R3PL4Y is invite only. <%= link_to 'Sign up here', :controller => 'sign_up', :action => 'index' %> to get in line for an invite.</p>
+</div>
+
+<%= content_for :aside do %>
+<aside>
+	<article>
+		<h2>R3PL4Y for the masses</h2>
+		<p>
+			R3PL4Y is for you. Want score games to follow up later? Want to
+			review games for your friends? Want to write a diary about the game
+			you're playing? Or do you want to write boss strategies?
+		</p>
+		<p>
+			R3PL4Y is for you.
+		</p>
+	</article>
+
+	<article>
+		<h2>Hello designer,</h2>
+		<p>
+			Do you want to contribute to R3PL4Y? We desperately need a new design
+			for this start page. Please contact me at <a href="mailto:mikael.lundin@rubriks.com">mikael.lundin@rubriks.com</a>
+		</p>
+	</article>
+</aside>
+<% end %>

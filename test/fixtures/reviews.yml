@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 
+  rating: 1
+  review: MyText
+  finished: false
+  published: 2012-01-03 17:26:01
+  game_id: 1
+  member_id: 1
+
+two:
+  id: 
+  rating: 1
+  review: MyText
+  finished: false
+  published: 2012-01-03 17:26:01
+  game_id: 1
+  member_id: 1

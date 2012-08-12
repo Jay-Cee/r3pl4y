@@ -1,0 +1,169 @@
+/* @group Nav plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+$color-bordertop: #3F3F3F;
+$color-borderbottom: #1A1A1A;
+
+$width-full: 300px;
+$width-collapsed: 70px;
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+.menu {
+	width: $width-full;
+	color: white;
+	font-weight: bold;
+
+	/*
+	Header of the user section, contains picture and name. We specify the line
+	height to be same as user picture to vertical align the user name in place
+	*/
+	header {
+		padding: $space;
+		line-height: 50px;
+		height: 50px;
+		border-bottom: 1px solid $color-borderbottom;
+		cursor: pointer;
+		overflow: hidden;
+
+		/*
+		Current user profile picture has a bottom border and floats left
+		beside current user name.
+		*/
+		.user-picture {
+			border-bottom: 1px solid $color-bordertop;
+		}
+
+		/*
+		Current user name should have the same size as every other heading
+		in the application. Place a drop shadow on the user name, black down.
+		*/
+		.user-name {
+			text-shadow: $text-dropshadow;
+			vertical-align: 40%;
+			display: inline;
+			margin-left: 15px;
+		}
+	}
+
+	/*
+	Each menu item leads to loading different data in the middle column.
+
+	:hover		- Subtle hover highlight
+	.selected - Light text and dark background
+	*/
+	nav a {
+		padding: $space;
+		display: block;
+		color: #BCBCBC;
+		text-transform: capitalize;
+		text-decoration: none;
+		@include heading;
+		text-shadow: $text-dropshadow;
+    line-height: 30px;
+
+		&.selected, &:hover {
+			color: #F0F0F0;
+			background-color: rgba(0, 0, 0, 0.1);
+			border-top: 1px solid transparent;
+			border-bottom: 1px solid transparent;
+		}
+
+    &[data-icon]:before {
+      font-family: fico;
+      font-size: $fontsize-header * 1.5;
+      line-height: auto;
+      content: attr(data-icon);
+      speak: none;
+      padding-right: $space-small;
+      vertical-align: -4px;
+      padding-right: 33px;
+      text-transform: none;
+    }
+	}
+
+	// horizontal 
+	@media only screen and (max-width : 768px) {
+		width: 100%;
+		height: 70px;
+		border-bottom: 1px solid black;
+
+		header {
+			width: 50px;
+			float: left;
+			h1 { display: none; }
+		}
+
+		nav {
+			padding: $space;
+			a {
+				float: left;
+				width: 30px;
+				overflow: hidden;
+			}
+		}
+
+		.fill { clear: left; }
+	}
+
+	// vertical 
+	@media only screen and (min-width : 768px) {
+		height: 100%;
+		min-height: 100%;
+		height: auto !important;
+		margin: 0 auto -73px; /* Bottom margin, negative value of footer height */
+
+		nav a {
+			padding-left: $space-large;
+			border-top: 1px solid $color-bordertop;
+			border-bottom: 1px solid $color-borderbottom;
+		}
+	}
+}
+
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+
+.nav-selected {
+  @extend .nav-item;
+}
+//  -----------------------------------------------------------------
+//  Animations
+//  -----------------------------------------------------------------
+
+// portrait & landscape: collapse with animation
+@media only screen and (max-width : 1259px) {
+
+	/*
+	Animation when collapsing element
+	*/
+	.three-columns .menu-wrapper {
+		-moz-animation-duration: 0.5s;
+		-moz-animation-name: collapse-menu;
+		-webkit-animation-duration: 0.5s;
+		-webkit-animation-name: collapse-menu;
+
+		overflow: hidden;
+		width: $width-collapsed;
+	}
+	@-moz-keyframes collapse-menu {
+		0% { width: $width-full; }
+		100% { width: $width-collapsed;	}
+	}
+
+	@-webkit-keyframes collapse-menu {
+		0% { width: $width-full; }
+		100% { width: $width-collapsed;	}
+	}
+}
+
+/* @end NAV plugin */

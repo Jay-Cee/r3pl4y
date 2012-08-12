@@ -1,0 +1,47 @@
+/* @group SUGGESTION plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+.suggestion {
+    @include white-box;
+    
+    .game-cover {
+        width: 80px;
+        margin: $space $space $space 0;
+    }
+    th {
+      font-weight: bold;
+    }
+    td {
+      padding: $space-small;
+    }
+}
+
+.new_suggestion {
+    label {
+        line-height: 1.5em;
+        font-weight: bold;
+    }
+    textarea {
+        width: 578px;
+        padding: $space;
+        @include box-shadow(0px, 0px, 5px, black);
+    }
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end SUGGESTION plugin */

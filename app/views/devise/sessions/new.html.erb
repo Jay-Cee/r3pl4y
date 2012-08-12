@@ -1,0 +1,19 @@
+<%# Set the page title %>
+<% content_for :title do %>Sign in to R3PL4Y<% end %>
+
+<section class="sign_in">
+	<h2>We love you,</h2>
+	<div class="text">
+		<p class="message">
+			but we don't want your passwords. Please select your favorite identity provider.
+		</p>
+		<p class="disclaimer">
+			We will only update your feed when you explicitly tell us to, and we will not
+			request your e-mail or spam you in any way.
+		</p>
+	</div>
+	<div class="identity-providers">
+		<%= render "links" %>
+	</div>
+	<div class="clear"></div>
+</section>

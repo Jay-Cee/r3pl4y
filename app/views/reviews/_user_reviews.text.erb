@@ -1,0 +1,11 @@
+<% user_reviews.each_with_index do |review,i| %>
+<% if i < 10 %>
+	<li onclick="" class="<%= review.review.strip.empty? ? 'rating-only' : 'has-review' %>" data-from="<%= review.published.xmlschema %>">
+		<%= render :partial => "reviews/user_review.text.erb", :object => review %>
+	</li>
+<% else %>
+	<li onclick="" class="load-more" data-from="<%= review.published.xmlschema %>">
+  <%= link_to "Load more entries", "#{request.fullpath.gsub(/\?.*/, '')}?from=#{review.published.xmlschema}", :class => 'load-more-link', 'data-icon' => '⟲' %> 
+	</li>
+<% end %>
+<% end %>

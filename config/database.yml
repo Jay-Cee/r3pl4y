@@ -1,0 +1,16 @@
+common: &common
+  adapter: postgresql
+  username: mikael
+  # password: password # from psql setup, see Postgresql
+
+development:
+  <<: *common
+  database: r3pl4y_development
+
+test:
+  <<: *common
+  database: r3pl4y_test
+
+production:
+  <<: *common
+  database: r3pl4y_production

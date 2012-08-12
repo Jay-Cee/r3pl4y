@@ -1,0 +1,168 @@
+/* @group USER plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+/*
+On user page, give review list a margin
+*/
+.users {
+	.review-list {
+		margin: 10px;
+	}
+}
+
+/*
+A profile picture, with a nice rounded corners effect
+*/
+.user-picture {
+	@include border-radius(5px);
+	width: 50px;
+	height: 50px;
+}
+.user-name {
+	@include heading;
+}
+
+.user-info {
+	.user-picture {
+		float:left;
+		margin: 0 10px 10px 0;
+	}
+}
+
+/*
+Presenting the user within the review pane
+*/
+.right, .middle {
+    .user-info {
+        padding: 10px;
+        min-height: 50px; // Size of user-picture
+        max-width: 640px;
+        position: relative;
+
+        .user-name {
+            padding-bottom: 2px;
+        }
+        .published {
+            float: left;
+            line-height: 1.5em;
+            margin-right: 10px;
+        }
+        .user-name, .published {
+            display: block;
+        }
+        .rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    }
+
+
+    .user {
+
+        .user-info {
+            background-color: white;
+            max-width: 620px;
+            border: 1px solid $color-border;
+            border-bottom: none;
+            margin: 10px 10px 0 10px;
+
+            // top border radius
+            -webkit-border-top-left-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -moz-border-radius-topleft: 10px;
+            -moz-border-radius-topright: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .user-follow {
+            background-color: white;
+            max-width: 620px;
+            border-right: 1px solid $color-border;
+            border-left: 1px solid $color-border;
+            margin: 0 10px;
+            padding: 10px;
+        }
+
+        .user-status {
+            background-color: white;
+            max-width: 620px;
+            border-right: 1px solid $color-border;
+            border-left: 1px solid $color-border;
+            padding: $space;
+            margin: 0 $space;
+            height: 40px;
+        }
+
+
+        .review-list {
+            // remove top radius	
+            -webkit-border-top-left-radius: 0;
+            -webkit-border-top-right-radius: 0;
+            -moz-border-radius-topleft: 0;
+            -moz-border-radius-topright: 0;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            margin-top: 0;
+        }
+    }
+}
+
+.user-link {
+	color: inherit;
+}
+
+.user-status {
+	clear: left;
+
+	.reviews, .following-link, .followers-link {
+		@include heading;
+		width: 33%;
+		display: block;
+		float: left;
+		text-align: center;
+
+		.label {
+			display: block;		
+			margin-bottom: 5px;
+		}
+		.data {
+			font-size: $fontsize-body;
+			color: $color-inactivetext;
+		}
+	}
+}
+
+/*
+Show the user score in pink/gold retro style
+*/
+.user-score {
+	@extend .r3pl4y;
+	font-size: 12px;
+
+	span {
+		color: gold;
+	}
+}
+.user-score:before {
+	content: 'R';
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end USER plugin */

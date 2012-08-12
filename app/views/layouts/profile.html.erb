@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<%= ie_conditional_tag :html %>
+<head>
+  <title><%= current_user.name %> - R3PL4Y</title>
+  <%= stylesheet_link_tag    "application" %>
+
+	<!--[if lt IE 9]>
+	<%= stylesheet_link_tag "style-ie" %>
+	<%= javascript_include_tag "html5" %>
+	<![endif]-->
+
+	<script src="/assets/modernizr.custom.09698.js"></script>
+
+  <%= csrf_meta_tags %>
+	
+  <!-- Set utf-8 encoding -->
+  <meta charset="utf-8" />
+
+	<!-- Set viewport for mobile browsers -->
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
+  
+	<!-- Run in fullscreen on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<!-- Use cleartype in Mobile Internet Explorer -->
+	<meta http-equiv="cleartype" content="on">
+
+	<!-- Home screen icon -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= image_path('static/icon_114.png') %>">
+	<!-- For the iPhone 4 with high-resolution Retina Display -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= image_path('static/icon_77.png') %>">
+	<!-- For the first-generation iPad -->
+	<link rel="apple-touch-icon-precomposed" href="<%= image_path('static/logo.png') %>">
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices -->
+	<link rel="shortcut icon" href="<%= image_path('static/logo.png') %>">
+
+</head>
+<body class="profile two-columns">
+  <section class="menu-wrapper">
+    <%= render 'layouts/menu' %>
+	</section>
+	<section id="static-content" class="middle">
+		<ul id="timeline" class="review-list" data-source="/profile/timeline">
+	</ul>
+	<ul id="following" class="user-list" data-source="<%= url_for(:controller => 'users', :action => 'following', :name => current_user.name) %>">
+	</ul>
+	<ul id="followers" class="user-list" data-source="<%= url_for(:controller => 'users', :action => 'followers', :name => current_user.name) %>">
+	</ul>
+	<div id="stats" data-source="<%= url_for(:controller => 'users', :action => 'stats', :name => current_user.name) %>">
+	</div>
+	<ul id="search-result" class="game-list">
+	</ul>
+	</section>
+  
+  <% if params[:controller] == 'profile' %>
+  <section id="start" class="right" data-source="/profile/start">
+    <!-- Content loaded dynamically -->
+  </section>
+  <% else %>
+  <section class="right" data-source="<%= request.path %>">
+    <!-- Content loaded dynamically -->
+  </section>
+  <% end %>
+  <%= javascript_include_tag "application" %>
+</body>
+</html>

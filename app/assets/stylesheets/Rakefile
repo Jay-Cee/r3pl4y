@@ -1,0 +1,472 @@
+#encoding: utf-8
+require "net/https"
+require "uri"
+
+cssfile = "../_includes/style.css"
+
+def blank_plugin (plugin_name)
+  content = <<PLUGIN
+/* @group #{plugin_name.upcase} plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+$color1:          #414141;
+$color-warning:   red; 
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+.#{plugin_name} {
+color: $color1;
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+.#{plugin_name}-warning {
+@extend .#{plugin_name};
+color: $color-warning;
+}
+
+//  ...
+
+/* @end #{plugin_name.upcase} plugin */
+PLUGIN
+  content
+end
+
+def get_license_head(name, copyright, license_summary, license_url, version)
+  content = <<NORMALISE_HEAD
+/* @group #{name} */
+
+/*! 
+#{name.upcase}
+#{copyright}
+Code licensed under the #{license_summary}:
+#{license_url}
+version: #{version}
+*/
+
+NORMALISE_HEAD
+  content
+end
+
+def get_apache2_license 
+  content = <<APACHE2_LICENSE
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+APACHE2_LICENSE
+  content
+end
+
+def get_answer_from_prompt
+  v = gets.chomp
+  if (v == "n" or v == "y") 
+    return v
+  else
+    print "    Please answer with 'y' or 'n'. "
+    get_answer_from_prompt
+  end
+end
+
+def download_csslint
+  sh "curl -O https://raw.github.com/stubbornella/csslint/master/lib/js.jar"
+  sh "curl -O https://raw.github.com/stubbornella/csslint/master/release/csslint-rhino.js"
+  mv "js.jar", "tools/rhino.jar"
+  mv "csslint-rhino.js", "tools/csslint.js"
+end
+
+def get_prepared_license(prepared)
+  get_apache2_license if prepared == "http://www.apache.org/licenses/LICENSE-2.0"
+end
+
+def get_public_license_head(name, version)
+  content = <<NORMALISE_HEAD
+/* @group #{name} */
+
+/*!
+  #{name.upcase}
+  Code licensed under Public Domain.
+  version: #{version}
+*/
+NORMALISE_HEAD
+  content
+end
+
+def remove_import_from_master_css(plugin_name)
+  imports = File.read "style.scss"
+  style_css = File.open "style.scss", "w+"
+  style_css.write imports.sub("@import \"plugins/%s\";\n" % plugin_name, "");
+  style_css.close
+  
+  puts "removed plugin @import from style.scss"
+end
+
+def add_import_to_master_css(plugin_name)
+  imports = File.read "style.scss"
+  style_css = File.open "style.scss", "w+"
+  style_css.write imports.sub("// ...", "@import \"plugins/%s\";\n// ..." % plugin_name);
+  style_css.close
+  
+  puts "added plugin @import to style.scss"
+end
+
+def get_vendor_css(vendor_name, license_summary, uri_css, uri_license, version, copyright)
+  prepared_licenses = Array["http://www.apache.org/licenses/LICENSE-2.0"]
+  vendor_file_name = vendor_name.gsub(" ", "_").downcase
+  Dir.mkdir(File.join(Dir.pwd, "vendor")) unless File.directory?("vendor")
+  if File.exists?("vendor/_%s.scss" % vendor_file_name)
+    puts "vendor/_%s.scss already exists, aborting to not risk any local adaptions." % vendor_file_name
+  else  
+    uri = URI(uri_css)
+    puts "get CSS source from %s" % uri.host
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl = true
+    vendorcss_content = http.start do |http|
+      request = Net::HTTP::Get.new uri.request_uri
+
+      vendorcss_content = http.request(request).body
+      
+      puts "Adding the ability to skip legacy browser support with $legacy_browsers boolean"
+      
+      vendorcss_content.gsub(/([_\*].+?;)/) do |oldie| 
+        "@if $legacy_browsers == true { " + oldie + " }"
+      end
+    end
+    
+    unless (uri_license == nil)
+      if prepared_licenses.include? uri_license
+        puts "using prepared license (%s)" % uri_license
+        vendorcss_head = "%s/*\n%s\n*/\n" % [get_license_head(vendor_name, copyright, license_summary, uri_license, version), get_prepared_license(uri_license)]
+      else
+        uri = URI(uri_license)
+        puts "get LICENSE from %s" % uri.host
+    
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.use_ssl = true
+        vendorcss_head = http.start do |http|
+          request = Net::HTTP::Get.new uri.request_uri
+          vendorcss_license = http.request(request).body
+        
+          "%s/*\n%s\n*/\n" % [get_license_head(vendor_name, copyright, license_summary, uri_license, version), vendorcss_license]
+        end
+      end
+    else
+      vendorcss_head = get_public_license_head(vendor_name, version)
+    end
+      
+    vendorcss_css = File.new("vendor/_%s.scss" % vendor_file_name, "w+");
+    vendorcss_css.write "%s\n%s\n\n/* @end %s */" % [vendorcss_head, vendorcss_content, vendor_name.upcase, vendor_name]
+    vendorcss_css.close
+    
+    puts "Created new file ./vendor/_%s.scss" % vendor_file_name
+    
+    style_css_content = File.read "style.scss"
+    unless style_css_content.match(vendor_file_name)
+      style_css = File.open "style.scss", "w+"
+      style_css.write style_css_content.sub("contribs\";\n", "contribs\";\n@import \"vendor/%s\";\n" % vendor_file_name)
+      style_css.close
+
+      puts "Added @import of vendor/_%s.css to style.scss" % vendor_file_name
+    end
+  end
+end
+
+def colorize(text, color_code); "#{color_code}#{text}\e[0m"; end
+def red(text); colorize(text, "\e[31m"); end
+def green(text); colorize(text, "\e[32m"); end
+def purple(text); colorize(text, "\e[34m"); end
+def cyan(text); colorize(text, "\e[36m"); end
+def purple(text); colorize(text, "\e[35m"); end
+
+###################################################
+#                                                 #
+#      Here starts the targets.                   #
+#                                                 #
+###################################################
+
+namespace :vendor do
+  desc "download and prepare normalise.css and add it to style.scss imports"
+  task :normalise_css do
+    if File.exists?("_normalise_css.scss")
+      puts "_normalise.scss already exists, aborting to not risk any local adaptions."
+    else  
+      license_summary = "Public Domain"
+      vendor_name = "Normalise_css"
+      uri_css     = "https://raw.github.com/necolas/normalize.css/master/normalize.css"
+      version     = Time.new.strftime "master_%Y-%m-%d"
+      
+      get_vendor_css vendor_name, license_summary, uri_css, nil, version, nil
+    
+      mv "vendor/_normalise_css.scss", "_normalise_css.scss"
+    
+      imports = File.read "style.scss"
+      unless imports.match(" \"normalise_css\"")
+        imports.sub!("@import \"vendor/normalise_css\";\n", "")
+        imports.sub!("fonts\";", "fonts\";\n@import \"normalise_css\";")
+        style_css = File.open "style.scss", "w+"
+        style_css.write imports
+        style_css.close
+      end
+    end
+  end
+  
+  desc "download and prepares Twitter Bootstrap CSS (including license) and add it to style.scss imports"
+  task :twitter_bootstrap do
+    license_summary = "Apache 2.0 License"
+    vendor_name = "Twitter Bootstrap"
+    uri_css     = "https://raw.github.com/twitter/bootstrap/master/bootstrap.min.css"
+    uri_license = "http://www.apache.org/licenses/LICENSE-2.0"
+    version     = Time.new.strftime "master_%Y-%m-%d"
+    copyright   = "Copyright (c) 2009, Twitter, Inc"
+    
+    get_vendor_css vendor_name, license_summary, uri_css, uri_license, version, copyright
+  end
+    
+  desc "download and prepares CSS3-sass-mixins (including license) and add it to style.scss imports"
+  task :css3sassmixins do
+    Dir.mkdir(File.join(Dir.pwd, "vendor")) unless File.directory?("vendor")
+    
+    puts "Download _css3-sass-mixins.scss from raw.github.com ..."
+    sh "curl -O https://raw.github.com/madr/css3-sass-mixins/master/_all.scss"
+    mv "_all.scss", "vendor/_css3-sass-mixins.scss"
+    
+    puts "Adding @import of css3-sass-mixins to style.scss"
+    content = File.read("style.scss")
+    s = File.open("style.scss", "w+")
+    s.write "@import \"vendor/_css3-sass-mixins\";\n"
+    s.write content
+    s.close
+  end
+  
+  desc "download and prepares OOCSS Grid source (including license) and add it to style.scss imports"
+  task :oocss_grid do
+    license_summary = "BSD License"
+    vendor_name = "OOCSS Grid"
+    uri_css     = "https://raw.github.com/stubbornella/oocss/master/core/grid/grids.css"
+    uri_license = "https://raw.github.com/stubbornella/oocss/master/LICENSE"
+    version     = Time.new.strftime "master_%Y-%m-%d"
+    copyright   = "Copyright (c) 2009, Nicole Sullivan."
+    
+    get_vendor_css vendor_name, license_summary, uri_css, uri_license, version, copyright
+  end
+end
+
+namespace :plugin do
+  desc "creates and populates a file and add it to style.scss imports"
+  task :create, :name do |t, args|
+    if args.name == nil
+      puts "No plugin name was provided, try \n\n\trake plugin:create[<name>]\n\n" 
+    else 
+      plugin_name = args.name
+      plugin = File.new "plugins/_%s.scss" % plugin_name, "w+"
+      plugin.write blank_plugin plugin_name
+      plugin.close
+
+      puts "created and bootstraped file plugins/_%s.scss" % plugin_name
+      
+      add_import_to_master_css plugin_name
+    end
+  end
+
+  desc "include a present plugin to site.scss"
+  task :include, :name do |t, args|
+    if args.name == nil
+      puts "No plugin name was provided, try \n\n\trake plugin:include[<name>]\n\n" 
+    else 
+      plugin_name = args.name
+      add_import_to_master_css plugin_name
+    end
+  end
+  
+  desc "exclude plugin import from site.scss and remove file(s)"
+  task :destroy, :name do |t, args|
+    if args.name == nil
+      puts "No plugin name was provided, try \n\n\trake plugin:destroy[<name>]\n\n" 
+    else 
+      plugin_name = args.name
+      File.delete "plugins/_%s.scss" % plugin_name
+      
+      puts "deleted file plugins/_%s.scss" % plugin_name
+      
+      remove_import_from_master_css plugin_name
+    end
+  end
+  
+  desc "exclude a plugin from site.scss but keep the file"
+  task :exclude, :name do |t, args|
+    if args.name == nil
+      puts "No plugin name was provided, try \n\n\trake plugin:exclude[<name>]\n\n" 
+    else 
+      plugin_name = args.name
+      remove_import_from_master_css plugin_name
+    end
+  end
+end
+
+namespace :csslint do 
+  desc "Download latest build of CSSLint and prepare rules"
+  task :setup do
+    unless File.exists?("tools")
+      puts "Downloading rhino and csslint from github"
+      mkdir "tools"
+    else
+      puts "rhino and csslint already in place, will update to latest revision from github"
+    end
+    download_csslint
+  end
+  
+  desc "lint compiled CSS, rules are excluded in config.rb"
+  task :run do 
+    unless File.exists?("tools")
+      puts "Downloading rhino and csslint from github"
+      mkdir "tools"
+      download_csslint
+    end
+    # sh "compass compile --force"
+    sh "java -jar tools/rhino.jar tools/csslint.js %s --format=compact" % cssfile
+  end
+end
+
+namespace :yuicompressor do
+  desc "Download latest build from Yahoo! Developer"
+  task :setup do
+    unless File.exists?("tools")
+      mkdir "tools"
+    end
+    
+    sh "curl -O http://yui.zenfs.com/releases/yuicompressor/yuicompressor-2.4.7.zip"
+    sh "unzip yuicompressor-2.4.7.zip"
+    mv "yuicompressor-2.4.7/build/yuicompressor-2.4.7.jar", "tools/yuicompressor.jar"
+    sh "rm -rf yuicompressor-2.4.7 yuicompressor-2.4.7.zip"
+  end
+  
+  desc "compress compiled CSS."
+  task :run do
+    unless File.exists?("tools/yuicompressor.jar")
+      Rake::Task["yuicompressor:setup"].execute
+    end
+    # sh "compass compile --force"
+    sh "java -jar tools/yuicompressor.jar -o %s %s" % [ cssfile.sub(".css", ".min.css"), cssfile ]
+    sh "ls -ahl %s*" % cssfile.sub(".css", "")
+  end
+end
+
+desc "create config.rb with default values, installs compass, add @import to style.scss"
+task :compass do
+  puts "Creating config.rb"
+  
+  c = File.new("config.rb", "w+")
+  
+  content = <<CONFIG
+# Compass setup
+http_path = "/"
+css_dir = "../css"
+sass_dir = "."
+images_dir = ""
+javascripts_dir = ""
+output_style = :expanded
+CONFIG
+  
+  c.write content
+  c.close
+  
+  sh "gem install compass --no-ri --no-rdoc"
+  
+  puts "=> CSS-folder set to ../css, change config.rb if otherwise"
+  
+  puts "Adding @import compass to style.scss"
+  content = File.read("style.scss")
+  s = File.open("style.scss", "w+")
+  s.write "@import \"compass\";\n"
+  s.write content
+  s.close
+end
+
+task :default do
+  puts cyan "\n  Welcome to the Setup!"
+  puts cyan "  I am the setup agent and will make it"
+  puts cyan "  faster for you to start kick ass.\n"
+  puts "  Answer some questions below to start setup."
+  puts Array["  Only the letters", green("y"), "and", green("n"), "are accepted as answers. \n\n"].join(" ")
+  
+  puts green "  Part 1/4: Sass libraries.\n"
+  
+  # compass
+  print purple "    Use Compass in this project? (y/n) "
+  compass = get_answer_from_prompt
+  
+  # css3-sass-mixins
+  unless compass == "y" 
+    print purple "    Download and include css3-sass-mixins? (y/n) "
+    css3sassmixins = get_answer_from_prompt
+  end
+
+  puts green "\n  Part 2/4: CSS Libraries for prototyping.\n"
+
+  # Twitter bootstrap
+  print purple "    Download and include Twitter Bootstrap? (y/n) "
+  bootstrap = get_answer_from_prompt
+  
+  puts green "\n  Part 3/4: Useful vendor CSS.\n"
+
+  unless bootstrap == "y"
+    # normalise.css
+    print purple "    Download and prepare normalise.css? (y/n) "
+    normalise_css = get_answer_from_prompt
+  
+    # oocss grid
+    print purple "    Download and prepare OOCSS grid? (y/n) "
+    oocssgrid = get_answer_from_prompt
+  else
+    print "    Skipping since Twitter Bootstrap was choosed.\n"
+  end
+  
+  puts green "\n  Part 4/4: Quality tools for CSS.\n"
+  
+  # csslint
+  print purple "    Download and setup CSSLint? (y/n) "
+  csslint = get_answer_from_prompt
+  
+  # yui compressor
+  print purple "    Download and setup YUI Compressor? (y/n) "
+  yuicompressor = get_answer_from_prompt
+  
+  puts green "\n  Questions over, INSTALLING ...\n"
+  
+  Rake::Task["compass"].execute if compass == "y"
+  Rake::Task["vendor:css3sassmixins"].execute if css3sassmixins == "y"
+  Rake::Task["vendor:twitter_bootstrap"].execute if bootstrap == "y"
+  Rake::Task["vendor:normalise_css"].execute if normalise_css == "y"
+  Rake::Task["vendor:oocss_grid"].execute if oocssgrid == "y"
+  Rake::Task["csslint:setup"].execute if csslint == "y"
+  Rake::Task["yuicompressor:setup"].execute if yuicompressor == "y"
+  
+  puts green "\n  Setup is done! execute the following to start coding:"
+  
+  if compass == "y"
+    puts cyan "  compass watch"
+  else
+    puts "  sass --watch .:<css-folder>"
+  end  
+  
+  puts Array[green("\n  Also have a look at"), "rake -T", (green "to see other goodies.")].join(" ")
+  puts " "
+end

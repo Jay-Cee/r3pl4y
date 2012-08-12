@@ -1,0 +1,76 @@
+/* @group REVIEW plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+/*
+Paint a star to indicate that game was completed
+*/
+.star {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: transparent url(image_path('static/completed.png')) no-repeat 0 -16px;
+	text-indent: -3000px;
+}
+
+/*
+Rating is determined on number and color
+*/
+.rating {
+	font-family: emulogic;
+	text-transform: uppercase;
+	text-shadow: 2px 2px $color-inactivetext;
+}
+.rating:after {
+	content: "up";
+}	
+
+.rating-1 { color: brown; }
+.rating-1.selected, .rating-1:hover {	color: brown !important; }
+.rating-1:checked + label { color: brown !important; }
+
+.rating-2 { color: purple; }
+.rating-2.selected, .rating-2:hover { color: purple !important; }
+.rating-2:checked + label { color: purple !important; }
+
+.rating-3 { color: yellow; }
+.rating-3.selected, .rating-3:hover { color: yellow !important; }
+.rating-3:checked + label { color: yellow !important; }
+
+.rating-4 { color: blue; }
+.rating-4.selected, .rating-4:hover { color: blue !important; }
+.rating-4:checked + label { color: blue !important; }
+
+.rating-5 { color: green; }
+.rating-5.selected, .rating-5:hover {	color: green !important; }
+.rating-5:checked + label { color: green !important; }
+
+time {
+	font-size: $fontsize-small;
+	color: $color-inactivetext;
+
+	/*
+	No highlight color
+	*/
+	&>a {
+		color: inherit;
+	}
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+
+//  ...
+
+/* @end REVIEW plugin */

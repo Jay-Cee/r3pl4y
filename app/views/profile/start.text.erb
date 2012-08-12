@@ -1,0 +1,81 @@
+<a href="#start" class="collapse-link" data-icon="⌂">Open start pane &raquo;</a>
+
+<section>
+  <p>
+    <span class="beta">beta</span>
+    R3PL4Y is still a baby website learning how to walk and talk. We apologize for any less optimal experience you'll encounter.
+  </p>
+</section>
+
+<% if current_user.steam_auth.nil? or current_user.twitter_auth.nil? or current_user.facebook_auth.nil? %>
+<section>
+	<h2>Connect with..</h2>
+	<p>By adding other identity providers you will get friends from Facebook, Steam, Twitter directly on your timeline.</p>
+
+	<ul class="identity-providers">
+		<%# TWITTER %>
+		<% if current_user.twitter_auth.nil? %>
+		<li>
+			<%= link_to user_omniauth_authorize_path(:twitter), :class => 'provider twitter' do %>
+				<span>Connect with Twitter</span>
+			<% end %>
+		</li>
+
+		<% end %>
+		<%# FACEBOOK %>
+		<% if current_user.facebook_auth.nil? %>
+		<li>
+			<%= link_to user_omniauth_authorize_path(:facebook), :class => 'provider facebook' do %>
+				<span>Connect with Facebook</span>
+			<% end %>
+		</li>
+		<% end %>
+
+		<%# STEAM %>
+		<% if current_user.steam_auth.nil? %>
+		<li>
+			<%= link_to user_omniauth_authorize_path(:steam), :class => 'provider steam' do %>
+				<span>Connect with Steam</span>
+			<% end %>
+		</li>
+		<% end %>
+	</ul>
+</section>
+<% end %>
+
+<section>
+	<h2>Invite your friends</h2>
+	<p>You can invite others to R3PL4Y simply by sending them this link</p>
+  <%= link_to({ :controller => 'users', :action => 'invite', :name => current_user.name, :invite_phrase => current_user.invite_phrase, :only_path => false }, { :class => 'invite-link highlight', 'data-icon' => '★'}) do %>
+		<span><%= url_for(:controller => 'users', :action => 'invite', :name => current_user.name, :invite_phrase => current_user.invite_phrase, :only_path => false) %></span>
+	<% end %>
+</section>
+
+<section>
+	<article>
+    <h2>You can contribute</h2>
+		<p>R3PL4Y can become much better with your contribution. It is up to you, lending a hand making this exactly what you want and need.</p>
+    <ul>
+        <li><em>Knowledge: </em>Whenever you see a game that misses description, you can click the link that says "Suggest description" and help us complete the game database. Every contribution is dearly appreciated.</li>
+
+        <li><em>Code: </em>Did you know that R3PL4Y is open source? You can fork the code on github, write your own feature and send it to us as a pull request. Take a look at our Trello kanban board to see what needs to be doing. <a href="https://github.com/rubriks/r3pl4y">Go to GitHub &raquo;</a></li>
+
+        <li class="donate"><em>Money: </em>R3PL4Y has annual costs of 800$. If you like this service, you can help us bear this burdon by contributing only a small amount. 
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick" />
+					<input type="hidden" name="hosted_button_id" value="EJ6F3BWWM9W3Y" />
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+				</form>
+				</li>
+    </ul>
+	</article>
+</section>
+
+<section class="news">
+	<h2>Latest news</h2>
+	<a href="http://blog.r3pl4y.com" class="go-to-blog-link">Go to blog &raquo;</a>
+	<article id="tumblr-news" data-source="<%= url_for(:controller => 'site', :action => 'tumblr') %>">
+		<!-- Will fill this dynamically from javascript -->
+	</article>
+</section>

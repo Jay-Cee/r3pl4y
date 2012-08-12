@@ -1,0 +1,18 @@
+<%# Set the page title %>
+<% content_for :title do %><%= @user.name %><% end %>
+
+<ul id="latest-reviews" class="review-list" data-source="<%= url_for(:controller => 'reviews', :action => 'index', :user_id => @user.name) %>">
+	<%= render :partial => 'reviews/user_reviews.text.erb', :object => @reviews %>
+</ul>
+
+<% content_for :aside do %>
+<aside>
+	<%= render :partial => 'show', :object => @user %>
+</aside>
+<% end %>
+
+<% content_for :rss do %>
+<!-- START: rss -->
+<link rel="alternate" type="application/rss+xml" title="<%= @user.name %> reviews RSS" href="<%= user_url(@user) %>.rss" />
+<!-- END: rss -->
+<% end %>

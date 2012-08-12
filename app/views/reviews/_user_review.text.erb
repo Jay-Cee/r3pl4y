@@ -1,0 +1,33 @@
+<%# Game Reviewed %>
+<%= link_to(user_review.game, :class => 'game-link') do %>
+	<%= image_tag user_review.game.thumbnail(:small), :class => 'game-cover' %>
+	<span class="game-title"><%= user_review.game.title %></span>
+<% end %>
+
+<p class="review-info">
+	<%# Reviewer %>
+	<%= link_to user_review.user.name, user_review.user, :class => 'user-link' %>
+
+	<%# User Score %>
+	<%= render :partial => 'users/score.html.erb', :object => user_review.user %>
+
+
+	<%# Time and direct link %>
+	<time class="published" datetime="<%= user_review.published.xmlschema %>"><%= link_to '', user_review_path(user_review.user, user_review), :class => 'review-link' %></time>
+	
+	<% if user_review.finished %>
+		<span class="star" title="Finished this game">Completed the game</span>
+	<% end %>
+</p>
+
+<% if user_review.rating %>
+	<span class="rating rating-<%= user_review.rating %>"><%= user_review.rating %></span>
+<% end %>
+
+<% if user_review.user == current_user or (current_user and current_user.role == 'admin') %>
+  <div class="review-actions">
+  <%= link_to('Edit', edit_user_review_path(user_review.user, user_review), { :class => 'edit-button', "data-icon" => '✎'.html_safe })  %>
+  <%= link_to 'Delete', user_review_path(user_review.user, user_review), :confirm => 'Are you sure?', :method => 'delete', :class => 'delete-button',  "data-icon" => '×'.html_safe  %>
+    
+  </div>
+<% end %>

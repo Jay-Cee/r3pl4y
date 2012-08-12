@@ -1,0 +1,16 @@
+<%# When authenticated and aldready following this user
+    -> display unfollow link
+		Else
+		-> display follow link
+%>
+<div class="user-follow">
+	<% if not current_user.nil? and current_user.following.include? user_follow %>
+		<%= link_to({ :controller => 'profile', :action => 'unfollow', :name => user_follow.name }, :class => 'follow-link unfollow') do %>
+			<span>Unfollow</span>
+		<% end %>
+	<% else %>
+		<%= link_to({ :controller => 'profile', :action => 'follow', :name => user_follow.name }, :class => 'follow-link follow') do %>
+			<span>Follow</span>
+		<% end %>
+	<% end %>
+</div>

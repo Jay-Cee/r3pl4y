@@ -1,0 +1,10 @@
+<article>
+	<h2>R3PL4Y is invite only,</h2>
+	<p>in order to keep the dark sides of Internet out, R3PL4Y has been made invite only. You'll need to find a friend that is willing to invite you, or sign up for an anonymous invite.</p>
+	<%= form_for @invite, :url => url_for(:action => 'new') do |f| %>
+		<%= f.label :email, 'E-mail' %>:
+		<%= f.text_field :email, :type => 'email', :placeholder => 'bionic.commando@r3pl4y.com', :required => 'required' %>
+
+		<%= f.submit 'Sign up' %>
+	<% end %>
+</article>

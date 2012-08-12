@@ -1,0 +1,142 @@
+/* @group START plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+#start {
+	display: block;
+	border-left: none;
+	background-color: transparent;
+
+	.collapse-link {
+		background-color: white;
+		margin: 0 $space-large;
+		padding: $space;
+		@include heading;
+		display: none;
+
+    &[data-icon]:before {
+      font-family: fico;
+      content: attr(data-icon);
+      speak: none;
+      text-transform: none;
+      padding: $space;
+    }
+
+		-webkit-border-bottom-right-radius: $space-small;
+		-webkit-border-bottom-left-radius: $space-small;
+		-moz-border-radius-bottomright: $space-small;
+		-moz-border-radius-bottomleft: $space-small;
+		border-bottom-right-radius: $space-small;
+		border-bottom-left-radius: $space-small;
+	}
+	
+
+	/*
+	Sections are probably only used on start
+	*/
+	section {
+		background-color: white;
+		margin: $space-large;
+		padding: $space;
+		@include border-radius($space-small);
+		font-size: $fontsize-small;
+		max-width: 620px;
+
+		p {
+			margin: 1.25em 0;
+		}
+	}
+
+/*
+Beta message
+*/
+.beta {
+  font-family: emulogic, Terminal;
+  color: #ED00CB;
+  text-transform: uppercase;
+  text-shadow: #AFAFB1 4px 4px;
+  font-size: 3em;
+  float: left;
+  margin-right: $space;
+  margin-bottom: $space;
+}
+
+	/*
+	Align donation text and button
+	*/
+	.donate {
+		vertical-align: top;
+		&>form {
+			display: inline;
+		}
+	}
+
+	section.news {
+		h2 {
+			display: inline-block;
+		}
+
+		.go-to-blog-link {
+			line-height: 1.4em;
+			float: right;
+			color: $color-highlight;
+		}
+
+		h3 {
+			font-size: 1.5em;
+			display: inline-block;
+		}
+
+		time {
+			float: right;
+			line-height: 1.5em;
+		}
+	}
+	// horizontal desktop
+	@media only screen and (max-width : 1260px) {
+		/*
+		Show start link
+		*/
+		.collapse-link {
+			display: inline-block;
+		}
+		/*
+		Hide sections
+		*/
+		section {
+			display: none;
+		}		
+
+		&.focused {
+			/* 
+			Hide start link
+			*/
+			.collapse-link {
+				display: none;
+			}
+			/* 
+			Show sections
+			*/
+			section {
+				display: block;
+			}
+		}
+	}
+}
+
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+//  ...
+
+/* @end START plugin */

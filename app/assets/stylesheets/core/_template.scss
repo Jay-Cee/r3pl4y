@@ -1,0 +1,152 @@
+//  -----------------------------------------------------------------
+//  Template
+//  -----------------------------------------------------------------
+
+//  -----------------------------------------------------------------
+//  Mixins
+//  -----------------------------------------------------------------
+
+@mixin white-box {
+	@include border-radius($space);
+	background-color: white;
+	margin: $space;
+	padding: $space;
+}
+    // room for $colors, $widths, et cetera
+    // ...
+
+//  -----------------------------------------------------------------
+//  Columns and sections in this design.
+//  -----------------------------------------------------------------
+
+html {
+	height: 100%;
+}
+
+body {
+	background: #000 url(image_path('black_linen_v2.png')) repeat top left;
+	font-family: Chicago, Espy Sans, Myriad, Helvetica;
+	-webkit-font-smoothing: subpixel-antialiased;
+	font-size: $fontsize-body;
+
+	&.profile {
+		height: 100%;
+	}
+}
+
+// disable the browser link color and underline
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+// give paragraphs space top-bottom
+p {
+	margin: $space auto;
+	line-height: 1.25em;
+}
+
+// second headers should be larger
+h2 {
+	font-size: 1.5em;
+}
+
+/*
+Typical styles for articles in the application
+*/
+article {
+	h2 {
+		font-size: 1.5em;
+		font-weight: bold;
+		margin: 1em 0;
+	}
+
+	ul {
+		list-style-type: square;
+	}
+	ol {
+		list-style-type: decimal;
+	}
+	ul, ol {
+		margin-left: 1em;
+
+		li 
+		{ 
+			margin: 1.25em 1em;
+			line-height: 1.25em;
+		}
+	}
+
+	/*
+	Make paragraphs a bit easier to read
+	*/
+	p {
+		line-height: 1.25em;
+		margin: 1.25em 0;
+	}
+
+	/* Make fat */
+	em {
+		font-weight: bold;
+	}
+
+	/*
+	Images within review body should not be allowed to
+	expand the surrounding box
+	*/
+	p img {
+		max-width: 100%;
+	}
+
+	/*
+	Make links stand out
+	*/
+	a {
+		color: $color-highlight;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+
+  /*
+  Headline links should not be highlighted
+  */
+  h1,h2,h3,h4 {
+    & > a {
+      color: inherit;
+    }
+  }
+
+	blockquote {
+		text-indent: $space;
+		font-style: italic;
+	}
+}
+
+// @child_of .body
+.main {
+ 	max-width: 640px; 
+
+	/*
+	On more than 990px width, put aside to right
+	*/
+	@media only screen and (min-width : 990px) {
+		float: left;
+		width: 640px;
+	}
+
+ 	article { @include white-box; }
+}
+
+// @child_of .body
+aside {
+	@include white-box;  
+
+	/*
+	On more than 990px width, put aside to right
+	*/
+	@media only screen and (min-width : 990px) {
+		float: left;
+		width: 300px;
+	}
+}

@@ -1,0 +1,25 @@
+<h2>Statistics for <%= @user.name %></h2>
+<div class="user-stats">
+	<div class="row">
+		<span class="label">Number of rated games</span>
+		<span class="data"><%= @quantity %></span>
+	</div>
+
+	<div class="row">
+		<span class="label">Average rating</span>
+		<span class="data"><%= "%.2f" % @average %></span>
+	</div>
+</div>
+
+<h2>Reviews by rating</h2>
+<ul class="custom-lists">
+	<% (1..5).each do |rating| %>
+	<li>
+		<%= link_to({:controller => 'users', :action => 'lists', :name => @user.name, :rating => rating }, { :class => 'list-link' }) do %>
+			<span class="rating rating-<%= rating %>"><%= rating %></span> reviews <span class="no-ratings">(<%= @ratings[rating] %>)</span>
+		<% end %>
+		<span class="bar" style="width: <%= 300 * @ratings[rating] / @quantity %>px"><%= 100 * @ratings[rating] / @quantity %>%</span>
+	</li>
+	<% end %>
+</ul>
+

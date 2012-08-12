@@ -1,0 +1,16 @@
+<section class="suggestion">
+    <h2>Suggest description for <%= @suggestion.game.title %></h2>
+    <%= image_tag @suggestion.game.thumbnail.url(:small), :class => 'game-cover' %>
+    <p>
+        Please suggest a short story about the game narrative, without spoiling the story.
+    </p>
+    <p>
+        Do not include information about game play, controls, platforms, genre, developers, publishers, prequels, sequels, graphics, sound, style, age, or anything that is not connected to the game's story. Let reviews take these conclusions.
+    </p>
+    <%= form_for @suggestion do |s| %>
+        <%= s.hidden_field :game_id %>
+        <%= s.label :description %>
+        <%= s.text_area :description %>
+        <%= s.submit "Send" %>
+    <% end %>
+</section>

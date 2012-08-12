@@ -1,0 +1,10 @@
+<ul class="user-list">
+	<% userlist.each do |user| %>
+		<li>
+			<h2><%= link_to(user.name, user) %></h2>
+			<img src="<%= user.picture %>" />
+			<%= render :partial => 'follow', :object => user %>
+			<div class="clear"></div>
+		</li>
+	<% end %>
+</ul>

@@ -1,0 +1,5 @@
+<% if @search_result and not @search_result.empty? then %>
+<%= render :partial => 'games/list', :object => @search_result %>
+<% else %>
+	<li class="end">No result was found. Check your spelling and try again.</li>
+<% end %>

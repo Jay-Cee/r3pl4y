@@ -1,0 +1,36 @@
+<section class="menu">
+  <header>
+    <%= image_tag current_user.picture, :class => 'user-picture' %>
+    <h1 class="user-name"><%= current_user.name %></h1>
+  </header>
+  <nav>
+    <%# TIMELINE %>
+    <%= link_to({:controller => 'profile', :action => 'timeline'}, {:data => {:container => '#timeline'}, :class => 'timeline selected', 'data-icon' => 'B' }) do %>
+      Timeline
+    <% end %>
+
+    <%# FOLLOWING %>
+    <%= link_to({:controller => 'users', :action => 'following', :name => current_user.name}, { :data => { :container => '#following' }, :class => 'following', 'data-icon' => '❤' }) do %> 
+      Friends
+    <% end %>
+
+    <%# FOLLOWERS %>
+    <%= link_to({:controller => 'users', :action => 'followers', :name => current_user.name}, { :data => { :container => '#followers' }, :class => 'followers', 'data-icon' => 'u' }) do %>
+      Followers
+    <% end %>
+
+    <%# STATISTICS %>
+    <%= link_to({:controller => 'users', :action => 'stats', :name => current_user.name}, { :data => { :container => '#stats' }, :class => 'stats', 'data-icon' => 'C' }) do %>
+      Statistics
+    <% end %>
+
+    <%# LOGOUT %>
+    <%= link_to(destroy_user_session_path, :method => :delete, :class => 'logout', 'data-icon' => 'P') do %>
+      Logout
+    <% end %>
+  </nav>
+  <div class="fill"></div>
+</section>
+<footer>
+  <%= render 'layouts/search.html.erb' %>
+</footer>

@@ -1,0 +1,15 @@
+<%# Set the page title %>
+<% content_for :title do %><%= "#{@review.user.name} reviews #{@review.game.title}" %><% end %>
+
+
+<section class="review-card">
+	<%= render :partial => 'show_full', :object => @review %>
+</section>
+
+<% content_for :aside do %>
+<!-- START: aside -->
+<aside>
+	<%= render :partial => 'users/show', :object => @review.user %>
+</aside>
+<!-- END: aside -->
+<% end %>

@@ -1,0 +1,230 @@
+/* @group LIST plugin */
+
+//  -----------------------------------------------------------------
+//  Constants, colors, units, functions(?)
+//  -----------------------------------------------------------------
+
+
+//  -----------------------------------------------------------------
+//  Struct, base & primitives
+//  -----------------------------------------------------------------
+
+.list {
+	@include border-radius(10px);
+	background-color: white;
+
+	/*
+	A list item for a review in the list
+
+	:first-child - Should have no border top
+	:last-child  - Should have no bottom border
+	:hover - A light gray tint on hover, and cursor pointer
+	*/
+	li {
+		padding: 10px;
+		border-top: 1px solid #F0F0F0;
+		border-bottom: 1px solid #D9D9D9;
+		overflow: hidden;
+		position: relative;
+	}
+	li:first-child {
+		border-top: none;
+	}
+	li:last-child {
+		border-bottom: none;
+	}
+	li.has-review:hover {
+		cursor: pointer;
+	}
+	li.end {
+		font-style: italic;
+		text-align: center;
+	}
+
+	/*
+	Cover picture of the game
+	*/
+	.game-cover {
+		width: 60px;
+	}
+
+	/*
+	User picture should float left
+	*/
+	.user-picture {
+		float: left;
+		margin-right: 10px;
+	}
+
+	/*
+	The game title should be smaller in this list
+	*/
+	.game-title {
+		font-size: $fontsize-header;
+	}
+
+	/*
+	Paint review info in another color
+	*/
+	.review-info {
+		color: $color-inactivetext;
+	}
+
+	/* 
+	Make paragraph text smaller but properly formatted
+	*/
+	p {
+		line-height: 1.25em;
+		font-size: $fontsize-small;
+		margin-bottom: 1em;
+	}
+
+	/*
+	Rating is positioned in the top right corner
+	*/
+	.rating {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+
+  .review-actions {
+    line-height: 1.25em;
+    font-size: $fontsize-small;
+    color: $color-highlight;
+    display: none;
+  }
+
+  // display actions when hovering
+  li:hover .review-actions {
+    display: block;
+
+    [data-icon]:before {
+      font-family: fico;
+      content: attr(data-icon);
+      speak: none;
+      color: $color-highlight;
+      font-size: $fontsize-small;
+      padding-right: $space-small;
+    }
+  }
+
+	.load-more {
+		text-align: center;
+	}
+	.load-more-link {
+		@include heading;
+		line-height: 30px;
+		height: 30px;
+		display: inline-block;
+
+    &[data-icon]:before {
+      font-family: fico;
+      content: attr(data-icon);
+      speak: none;
+      margin-right: $space;
+      vertical-align: middle;
+    }
+	}
+
+}
+
+//  ...
+
+//  -----------------------------------------------------------------
+//  Skins, variations, uniques
+//  -----------------------------------------------------------------
+
+.review-list {
+	@extend .list;
+	li {
+		min-height: 82px;
+	}
+}
+
+.game-list {
+	@extend .list;
+
+	/*
+	All elements are clickable
+	*/
+	li {
+		cursor: pointer;
+		min-height: 82px;
+	}
+	.tags em {
+		color: black;
+	}
+}
+
+
+.duplicates-list {
+  @extend .game-list;
+}
+
+
+/*
+List of users
+*/
+.user-list {
+	@extend .list;
+
+	.user-follow {
+		position: absolute;
+		top: $space;
+		right: $space;
+	}
+
+	/*
+	All are clickable
+	*/
+	li {
+		cursor: pointer;
+	}
+}
+
+/* 
+List of custom lists
+*/
+.custom-lists {
+	@extend .list;
+
+	li {
+		cursor: pointer;
+	}
+
+	.rating {
+		position: static;
+		margin-right: $space-small;
+	}
+
+	.list-link {
+		@include heading;
+		line-height: 30px;
+		height: 30px;
+	}
+
+	.no-ratings {
+		font-size: small;
+		font-weight: normal;
+		font-style: italic;
+		color: $color-inactivetext;
+	}
+
+	.bar {
+		height: 20px;
+		margin: $space 0;
+		color: white;
+		background-color: $color-highlight;
+		float: right;
+		text-indent: -3000px;
+		
+		box-shadow: $space-small $space-small $color-border;
+		-moz-box-shadow: $space-small $space-small $color-border;
+		-webkit-box-shadow: $space-small $space-small $color-border;
+	}
+}
+
+//  ...
+
+/* @end LIST plugin */

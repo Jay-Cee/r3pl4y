@@ -1,0 +1,115 @@
+<style>
+#game_released_3i,
+#game_released_4i,
+#game_released_5i {
+	display: none; 
+}	
+</style>
+<%= form_for @game do |f| %>
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% @game.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.text_field :id, :disabled => true %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :slug %><br />
+    <%= f.text_field :slug %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :released %><br />
+    <%= f.datetime_select :released, :start_year => 1980, :prompt => {:month => 'Choose month', :year => 'Choose year'}  %>
+  </div>
+  <div class="field">
+    <%= f.label :rate_average %><br />
+    <%= f.text_field :rate_average, :disabled => true %>
+  </div>
+  <div class="field">
+    <%= f.label :rate_quantity %><br />
+    <%= f.text_field :rate_quantity, :disabled => true %>
+  </div>
+	
+	<div class="field">
+		<%# f.label :tags %><br />
+		<%# select_tag :tags, options_for_select(Tag.all.collect {|t| [ t.name, t.id ] }, @tags_list), :multiple => true %>
+	</div>
+	<div class="tags">
+
+		<!-- Platforms -->
+		<div class="field">
+			<%= f.label :platforms %><br />
+			<%= select_tag :platforms, options_for_select(@platforms_list, @platforms_selected), :multiple => true %>
+			<%= text_field_tag :new_platforms %>
+		</div>
+
+		<!-- Genre -->
+		<div class="field">
+			<%= f.label :genres %><br />
+			<%= select_tag :genres, options_for_select(@genres_list, @genres_selected), :multiple => true %>
+			<%= text_field_tag :new_genres %>
+		</div>
+
+		<!-- Publishers -->
+		<div class="field">
+			<%= f.label :publishers %><br />
+			<%= select_tag :publishers, options_for_select(@publishers_list, @publishers_selected), :multiple => true %>
+			<%= text_field_tag :new_publishers %>
+		</div>
+
+		<!-- Developers -->
+		<div class="field">
+			<%= f.label :developers %><br />
+			<%= select_tag :developers, options_for_select(@developers_list, @developers_selected), :multiple => true %>
+			<%= text_field_tag :new_developers %>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<div class="field">
+		<%= f.label :is_public %><br />
+		<%= f.check_box :is_public %>
+	</div>
+  <div class="actions">
+    <%= f.submit 'Update Game' %>
+  </div>
+<% end %>
+
+<h2>Upload thumbnail</h2>
+<%= form_for @game, :html => { :multipart => true } do |f| %>
+	<div class="field">
+		<%= f.label :thumbnail %>
+		<%= f.file_field :thumbnail %>
+	</div>
+  <div class="actions">
+    <%= f.submit 'Update Thumbnail' %>
+  </div>
+<% end %>
+
+<h2>Upload background</h2>
+<%= form_for @game, :html => { :multipart => true } do |f| %>
+	<div class="field">
+		<%= f.label "Background" %>
+		<%= f.file_field :background %>
+	</div>
+  <div class="actions">
+    <%= f.submit 'Update Background' %>
+  </div>
+<% end %>
