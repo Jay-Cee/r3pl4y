@@ -350,6 +350,9 @@ namespace "replay.profile", (exports) ->
       # hide scrollbar in middle column
       $('#timeline').on('updated', @hide_scrollbar_cb)
 
+      # load tumblr news when start is done
+      @body.on('loaded', '#start', @tumblr_cb)
+
       # load start pane
       # @start() unless @body.hasClass 'phone'
 
@@ -379,16 +382,14 @@ namespace "replay.profile", (exports) ->
       # put start in #rightc and load
       $(document.body).append(start)
 
-      # load tumblr news when start is done
-      start.on('load-success', @tumblr_cb)
-
       # load start
       replay.utils.load_source(start)
 
     # load news from tumblr
     tumblr_cb : (e) => @tumblr($('#tumblr-news'))
     tumblr : (tumblr) ->
-      tumblr.on('load-success', (e) -> e.stopPropagation())
+      return true unless tumblr.length
+      tumblr.on('loaded', (e) -> e.stopPropagation())
       tumblr.on('load-fail', => $(this).html(@tumblr_error_msg))
       replay.utils.load_source(tumblr)
 
