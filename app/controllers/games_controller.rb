@@ -140,7 +140,7 @@ class GamesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to profile_url }
+      format.html { render @original }
       format.json { head :ok }
     end
 
