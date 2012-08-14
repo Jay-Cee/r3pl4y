@@ -1,13 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  id: 
-  name: MyString
-  description: MyString
-  type: 
+  id: 1 
+  name: Amiga
+  description: 
+  category: platform
 
 two:
-  id: 
-  name: MyString
-  description: MyString
-  type: 
+  id: 2
+  name: Action
+  description: 
+  category: genre
+
+three:
+  id: 3
+  name: Blizzard
+  description:
+  category: publisher
+
+four:
+  id: 4
+  name: Blizzard
+  description:
+  category: studio
