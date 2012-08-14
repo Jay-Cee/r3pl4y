@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => ['show', 'reviews', 'rss']
   before_filter :authenticate_admin!, :except => ['show', 'reviews', 'rss']
 
   # GET /games
