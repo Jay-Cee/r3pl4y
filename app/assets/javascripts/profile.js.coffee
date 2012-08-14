@@ -255,7 +255,9 @@ namespace "replay.profile", (exports) ->
         url: url,
         type: 'DELETE',
         dataType: 'json',
-        success: (data) -> button.parents('li').remove()
+        success: (data) ->
+          button.parents('li').remove()
+          $("[data-source='#{url}']").remove()
       )
       return false
 

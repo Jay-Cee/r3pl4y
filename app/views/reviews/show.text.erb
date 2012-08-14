@@ -15,6 +15,11 @@
 		<% if @review.rating %>
 			<span class="rating rating-<%= @review.rating %>"><%= @review.rating %></span>
 		<% end %>
+    
+    <% if @review.user == current_user or (current_user and current_user.role == 'admin') %>
+      <%= link_to('Edit', edit_user_review_path(@review.user, @review), { :class => 'edit-button', "data-icon" => '✎'.html_safe })  %>
+      <%= link_to 'Delete', user_review_path(@review.user, @review), :confirm => 'Are you sure?', :method => 'delete', :class => 'delete-button',  "data-icon" => '×'.html_safe  %>
+    <% end %>
 	</div>
 </header>
 

@@ -9,6 +9,34 @@
 //  Struct, base & primitives
 //  -----------------------------------------------------------------
 
+// Edit and delete button on review header
+.user-info {
+  .edit-button, .delete-button {
+    color: $color-inactivetext;
+    font-size: $fontsize-small;
+    display: block;
+    float: right;
+    line-height: 1.25em;
+
+    &[data-icon]::before {
+      padding-right: $space-small;
+    }
+  }
+
+  .edit-button:hover,
+  .delete-button:hover {
+    color: $color-highlight;
+  }
+
+  .edit-button {
+    margin-top: $space-small;
+  }
+
+  .delete-button {
+    clear: right;
+  }
+}
+
 /*
 Paint a star to indicate that game was completed
 */
