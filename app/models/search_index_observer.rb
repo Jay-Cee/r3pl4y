@@ -3,8 +3,13 @@ class SearchIndexObserver < ActiveRecord::Observer
 
 	# add search index words to game
 	def before_save(game)
+    logger = Rails.logger
+
 		# debug
-		puts "SearchIndexObserver: Create words for #{game.title}"
+		logger.debug "SearchIndexObserver: Create words for #{game.title}"
+
+    # clear words for game
+    GameWord.destroy_all(:game_id => game.id)
 
 		# slugify the title
 		slug = Game.create_slug(game.title)

@@ -57,31 +57,9 @@ namespace :r3pl4y do
 
 	desc "Rebuild the search index"
 	task :rebuild_index => :environment do
-		# truncate tables
-		#sql = "SELECT id, title FROM games"
-		#records = ActiveRecord::Base.connection.execute(sql)
-
-		Game.all.each do |game|
-			puts game.title
-
-			# slugify the title
-			slug = Game.create_slug(game.title)
-
-			# get all words > 2 in length
-			words = slug.split('-').find_all {|item| item.length > 2}
-
-			words.each do |word|
-				index = Word.find_by_word(word)
-
-				if index
-					game.words.push(index)
-				else
-					game.words.push(Word.create! :word => word)
-				end
-			end
-
-			game.save
-		end
-		
+    Game.find_in_batches do |games|
+      game_ids = games.map {|game| game.id}
+      Delayed::Job.enqueue(RecreateSearchIndexJob.new(game_ids))
+    end
 	end
 end
