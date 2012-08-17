@@ -329,6 +329,7 @@ namespace "replay.profile", (exports) ->
       @body.on('click', '.custom-lists li', -> $(this).find('a.list-link').click())
 
       # show start on menu header click
+      @body.on('click', '.menu header', @reset_cb)
       @body.on('click', '.menu header', @start_cb)
 
       # unselect menu items on search input focus
@@ -372,6 +373,23 @@ namespace "replay.profile", (exports) ->
       link.parents('#start').addClass('focused')
       @body.removeClass('two-columns')
       @body.addClass('three-columns')
+
+    # reset to showing timeline
+    reset_cb : (e) => @reset()
+    reset : ->
+      static_content = @body.find('#static-content')
+
+      # remove all additional panes
+      static_content.nextAll("section").remove()
+
+      # hide all in static-content
+      static_content.children().hide()
+
+      # show timeline
+      @body.find('#timeline').show()
+
+      # show static-content
+      static_content.removeClass('hidden')
 
     # load start pane
     start_cb : (e) => @start()
