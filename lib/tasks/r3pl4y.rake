@@ -5,7 +5,7 @@ namespace :r3pl4y do
     puts "START: Refresh facebook tokens"
 
     # expires within a week
-    expiration = DateTime::now + 7
+    expiration = DateTime::now + 14
 
     # get soon to be expired users
     User.where('facebook_access_token_expires < ?', expiration).each do |user|
@@ -24,6 +24,7 @@ namespace :r3pl4y do
         puts "Failed to update facebook expiration token for user #{user.id}/#{user.name}: #{e.message}"
 
         # remove user facebook expires
+        user.facebook_access_token = nil
         user.facebook_access_token_expires = nil
       end
 
