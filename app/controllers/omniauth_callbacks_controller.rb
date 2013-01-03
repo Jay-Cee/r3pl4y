@@ -6,18 +6,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 			puts 'Called twitter callback'
 
 			auth = request.env['omniauth.auth']
+            params = request.env['omniauth.params']
 			@user = User.find_by_twitter_auth(auth['uid'])
 
 			# if not logged in and user not found
 			if current_user.nil? and @user.nil? then
-				
-				# invite is required to create a new account
-				if session[:invite].nil? then
-					redirect_to :controller => 'sign_up', :action => 'index'
-					return false
-				end
-
-				@user = User.create_with_omniauth(auth, session[:invite])
+				@user = User.create_with_omniauth(auth, params['follow'])
 				@user.save
 
 			# adding new identity provider
@@ -59,18 +53,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 			puts 'Called facebook callback'
 
 			auth = request.env['omniauth.auth'];
+            params = request.env['omniauth.params']
 			@user = User.find_by_facebook_auth(auth['uid'])
 
 			# if not logged in and user not found
 			if current_user.nil? and @user.nil? then
-	
-				# invite is required to create a new account
-				if session[:invite].nil? then
-					redirect_to :controller => 'sign_up', :action => 'index'
-					return false
-				end
-
-				@user = User.create_with_omniauth(auth, session[:invite])
+				@user = User.create_with_omniauth(auth, params['follow'])
 
 			# adding new identity provider
 			elsif not current_user.nil? and @user.nil? then
@@ -102,24 +90,18 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 		begin
 			puts 'Called steam callback'
 
-			auth = request.env['omniauth.auth'];
+			auth = request.env['omniauth.auth']
+            params = request.env['omniauth.params']
 			@user = User.find_by_steam_auth(auth['uid'])
 
 			# if not logged in and user not found
 			if current_user.nil? and @user.nil? then
-
-				# invite is required to create a new account
-				if session[:invite].nil? then
-					redirect_to :controller => 'sign_up', :action => 'index'
-					return false
-				end
-
-				@user = User.create_with_omniauth(auth, session[:invite])
+				@user = User.create_with_omniauth(auth, params['follow'])
 				@user.save
 
 			# adding new identity provider
 			elsif not current_user.nil? and @user.nil? then
-				steam_user = User.create_with_omniauth(auth, session[:invite])
+				steam_user = User.create_with_omniauth(auth, params['follow'])
 
 				@user = current_user
 				@user.steam_auth = auth['uid']

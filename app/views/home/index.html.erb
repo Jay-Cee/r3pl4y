@@ -1,30 +1,7 @@
 <div class="sign_in">
 	<h2>Sign in</h2> 
-	<p>If you're a member, sign in here</p>
-	<ul class="identity-providers">
-		<li>
-			<%= link_to user_omniauth_authorize_path(:twitter), :class => 'provider twitter', :rel => 'nofollow' do %>
-				<span>Sign in with Twitter</span>
-			<% end %>
-		</li>
-		<li>
-			<p class="or"><span>or</span></p>
-		</li>
-		<li>
-			<%= link_to user_omniauth_authorize_path(:facebook), :class => 'provider facebook', :rel => 'nofollow' do %>
-				<span>Sign in with Facebook</span>
-			<% end %>
-		</li>
-		<li>
-			<p class="or"><span>or</span></p>
-		</li>
-		<li>
-			<%= link_to user_omniauth_authorize_path(:steam), :class => 'provider steam', :rel => 'nofollow' do %>
-				<span>Sign in with Steam</span>
-			<% end %>
-		</li>
-	</ul>
-	<p>R3PL4Y is invite only. <%= link_to 'Sign up here', :controller => 'sign_up', :action => 'index' %> to get in line for an invite.</p>
+    <p>Choose your favorite identiy provider in order to sign in.</p>
+    <%= render :partial => 'devise/identity_providers', :locals => { :user_id => nil } %>
 </div>
 
 <%= content_for :aside do %>

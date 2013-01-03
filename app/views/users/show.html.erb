@@ -9,6 +9,9 @@
 <aside>
 	<%= render :partial => 'show', :object => @user %>
 </aside>
+<aside class="sign_in">
+    <%= render :partial => 'sign_up/follow_user', :object => @user %>
+</aside>
 <% end %>
 
 <% content_for :rss do %>

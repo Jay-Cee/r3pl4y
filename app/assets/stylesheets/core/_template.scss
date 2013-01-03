@@ -49,18 +49,14 @@ p {
 // second headers should be larger
 h2 {
 	font-size: 1.5em;
+    font-weight: bold;
+    margin: 1em 0;
 }
 
 /*
 Typical styles for articles in the application
 */
 article {
-	h2 {
-		font-size: 1.5em;
-		font-weight: bold;
-		margin: 1em 0;
-	}
-
 	ul {
 		list-style-type: square;
 	}
