@@ -1,7 +1,7 @@
 <div class="sign_in">
 	<h2>Sign in</h2> 
     <p>Choose your favorite identiy provider in order to sign in.</p>
-    <%= render :partial => 'devise/identity_providers', :locals => { :user_id => nil } %>
+    <%= render :partial => 'devise/identity_providers', :locals => { :user_id => nil, :redirect_url => nil } %>
 </div>
 
 <%= content_for :aside do %>

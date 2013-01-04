@@ -1,6 +1,6 @@
 <ul class="identity-providers">
     <li>
-    <%= link_to user_omniauth_authorize_path(:twitter, { follow: user_id }), :class => 'provider twitter', :rel => 'nofollow' do %>
+    <%= link_to user_omniauth_authorize_path(:twitter, { follow: user_id, redirect_url: redirect_url }), :class => 'provider twitter', :rel => 'nofollow' do %>
             <span>Sign in with Twitter</span>
         <% end %>
     </li>
@@ -8,7 +8,7 @@
         <p class="or"><span>or</span></p>
     </li>
     <li>
-        <%= link_to user_omniauth_authorize_path(:facebook, { follow: user_id }), :class => 'provider facebook', :rel => 'nofollow' do %>
+        <%= link_to user_omniauth_authorize_path(:facebook, { follow: user_id, redirect_url: redirect_url }), :class => 'provider facebook', :rel => 'nofollow' do %>
             <span>Sign in with Facebook</span>
         <% end %>
     </li>
@@ -16,7 +16,7 @@
         <p class="or"><span>or</span></p>
     </li>
     <li>
-        <%= link_to user_omniauth_authorize_path(:steam, { follow: user_id }), :class => 'provider steam', :rel => 'nofollow' do %>
+        <%= link_to user_omniauth_authorize_path(:steam, { follow: user_id, redirect_url: redirect_url }), :class => 'provider steam', :rel => 'nofollow' do %>
             <span>Sign in with Steam</span>
         <% end %>
     </li>

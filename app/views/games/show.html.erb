@@ -17,6 +17,12 @@
 </ul>
 
 
+<% content_for :aside do %>
+<aside class="sign_in">
+    <%= render :partial => 'sign_up/review_game', :object => @game %>
+</aside>
+<% end %>
+
 <%# Set the page title %>
 <% content_for :title do %><%= @game.title %><% end %>
 
