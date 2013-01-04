@@ -37,11 +37,13 @@ class ReviewsController < ApplicationController
   # GET /reviews/new.json
   def new
     @review = Review.new
-		@review.game = Game.find(params[:game_id])
+    @review.game = Game.find(params[:game_id])
 
     respond_to do |format|
-      format.html { render :layout => false } # new.html.erb
-      format.json { render json: @review }
+      if current_user
+        format.html { render :layout => false }
+        format.json { render json: @review }
+      end
     end
   end
 

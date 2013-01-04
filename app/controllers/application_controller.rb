@@ -13,7 +13,10 @@ class ApplicationController < ActionController::Base
 	end
 
 	def after_sign_in_path_for(resource)
-		return request.env['omniauth.params']['redirect_url'] || request.env['omniauth.origin'] || stored_location_for(resource) || '/profile'
+        params = request.env['omniauth.params']
+        redirect_url = params['redirect_url'] unless params.nil?
+        
+		return redirect_url || request.env['omniauth.origin'] || stored_location_for(resource) || '/profile'
 	end
 
   def authenticate_admin!

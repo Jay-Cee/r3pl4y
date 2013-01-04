@@ -38,6 +38,7 @@ Replay::Application.routes.draw do
 
 
   resources :games
+    match '/games/:slug/new-review' => 'games#new_review'
 	match '/games/import'
 	match '/games_oldest' => 'games#oldest'
 	match '/games/:slug/reviews' => 'games#reviews'

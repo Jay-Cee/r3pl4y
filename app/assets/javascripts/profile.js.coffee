@@ -216,6 +216,7 @@ namespace "replay.profile", (exports) ->
       @lb_initial_width = @lb_inner_width
       @lb_initial_height = @lb_inner_height
       @body.on('loaded', @apply_lightbox_button_cb)
+      @body.on('loaded', @auto_open_review_form_cb)
       @body.on('updated', @apply_lightbox_button_cb)
 
       # hook up delete button
@@ -237,6 +238,11 @@ namespace "replay.profile", (exports) ->
         initialWidth : @lb_initial_width,
         initialHeight : @lb_initial_height,
         onComplete : @init_markdown_cb)
+
+    # when url ends with new-review, auto open review form
+    auto_open_review_form_cb : (e) => @auto_open_review_form($(e.currentTarget))
+    auto_open_review_form : (section) ->
+      section.find('.review-button').click() if window.location.href.match(/\/new-review$/)
 
     # confirm box
     confirm_delete_cb : (e) =>

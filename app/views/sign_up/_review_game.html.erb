@@ -1,2 +1,2 @@
 <h2>Review <%= review_game.title %> on R3PL4Y</h2>
-<%= render :partial => 'devise/identity_providers', :locals => { :user_id => nil, :redirect_url => url_for(:controller => 'reviews', :action => 'new', :game_id => @game.id)   } %> 
+<%= render :partial => 'devise/identity_providers', :locals => { :user_id => nil, :redirect_url => url_for(:controller => 'games', :action => 'new_review', :slug => review_game.slug)   } %> 

@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
 	before_filter :authenticate_user!, :except => ['show', 'reviews', 'rss']
-  before_filter :authenticate_admin!, :except => ['show', 'reviews', 'rss']
+  before_filter :authenticate_admin!, :except => ['show', 'reviews', 'rss', 'new_review']
 
   # GET /games
   # GET /games.json
@@ -49,6 +49,17 @@ class GamesController < ApplicationController
         format.rss { render :layout => false }
         format.text { render :layout => false }
       end
+    end
+  end
+
+  def new_review
+    
+    @game = Game.where(:slug => params[:slug]).first
+	@reviews = reviews_for_game(@game.slug, DateTime.now())
+    
+    respond_to do |format|
+        format.html { render :layout => 'profile' }
+        format.text { render 'show.text.erb', :layout => false }
     end
   end
 

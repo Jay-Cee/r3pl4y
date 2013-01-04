@@ -32,6 +32,6 @@
 </div>
 <% end %>
 
-<ul class="review-list" data-source="<%= url_for(:action => 'reviews', :slug => @game.slug) %>">
+<ul class="review-list" data-source="<%= url_for(:controller => 'games', :action => 'reviews', :slug => @game.slug) %>">
 	<!-- Dynamic loading is done from client side -->
 </ul>
