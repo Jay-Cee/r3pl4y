@@ -242,7 +242,9 @@ namespace "replay.profile", (exports) ->
     # when url ends with new-review, auto open review form
     auto_open_review_form_cb : (e) => @auto_open_review_form($(e.currentTarget))
     auto_open_review_form : (section) ->
-      section.find('.review-button').click() if window.location.href.match(/\/new-review$/)
+      if window.location.href.match(/\/new-review$/)
+        section.find('.review-button').click()
+      return true
 
     # confirm box
     confirm_delete_cb : (e) =>
