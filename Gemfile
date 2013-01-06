@@ -24,6 +24,7 @@ gem 'paperclip', '~> 2.7'
 gem 'aws-sdk', '~> 1.5.7'
 gem 'paperclip-aws', '~> 1.6'
 gem 'kss', "~> 0.3.0"
+gem 'foreigner'
 gem 'delayed_job_active_record'
 
 # Gems used only for assets and not required

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713100253) do
+ActiveRecord::Schema.define(:version => 20130106133029) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -166,5 +166,19 @@ ActiveRecord::Schema.define(:version => 20120713100253) do
   end
 
   add_index "words", ["word"], :name => "index_words_on_word"
+
+  add_foreign_key "friends", "users", :name => "friends_user_id_fk", :dependent => :delete
+
+  add_foreign_key "game_tags", "games", :name => "game_tags_game_id_fk", :dependent => :delete
+  add_foreign_key "game_tags", "tags", :name => "game_tags_tag_id_fk", :dependent => :delete
+
+  add_foreign_key "game_words", "games", :name => "game_words_game_id_fk", :dependent => :delete
+  add_foreign_key "game_words", "words", :name => "game_words_word_id_fk", :dependent => :delete
+
+  add_foreign_key "reviews", "games", :name => "reviews_game_id_fk"
+  add_foreign_key "reviews", "users", :name => "reviews_user_id_fk"
+
+  add_foreign_key "suggestions", "games", :name => "suggestions_game_id_fk", :dependent => :delete
+  add_foreign_key "suggestions", "users", :name => "suggestions_user_id_fk"
 
 end
