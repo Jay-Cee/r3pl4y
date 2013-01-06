@@ -1,4 +1,5 @@
 Replay::Application.routes.draw do
+  match '/suggestions/rss' => 'suggestions#rss'
   resources :suggestions do
       member do
         get 'preview'

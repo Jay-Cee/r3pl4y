@@ -1,6 +1,6 @@
 class SuggestionsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :authenticate_admin!, :except => ["show", "create"]
+  before_filter :authenticate_user!, :except => ["rss"]
+  before_filter :authenticate_admin!, :except => ["show", "create", "rss"]
 
   # GET /suggestions
   # GET /suggestions.json
@@ -10,6 +10,14 @@ class SuggestionsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @suggestions }
+    end
+  end
+
+  def rss
+    @suggestions = Suggestion.order("created_at DESC").limit(10)
+
+    respond_to do |format|
+      format.rss { render layout: false }
     end
   end
 
