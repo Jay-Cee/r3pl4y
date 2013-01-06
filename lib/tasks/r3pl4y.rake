@@ -1,5 +1,37 @@
 namespace :r3pl4y do
 
+  desc 'Captures a heroku backup.'
+  task :backup do
+    # capture the backup bundle
+    timestamp = `date -u '+%Y%m%d%H%M'`.chomp
+    bundle_name = "r3pl4y-#{timestamp}"
+    puts "Capturing bundle #{bundle_name}..."
+    `heroku pgbackups:capture --expire`
+
+    # initialize Amazon S3
+    s3 = AWS::S3.new(
+      :access_key_id     => ENV['s3_access_key_id'],
+      :secret_access_key => ENV['s3_secret_access_key'],
+      :s3_endpoint => 's3-eu-west-1.amazonaws.com')
+
+    bucket = s3.buckets['files.r3pl4y.com']
+
+    # download & destroy the bundle we just captured
+    puts "Downloading bundle #{bundle_name}.dump"
+    backup_url = `heroku pgbackups:url`
+    `curl -o '#{bundle_name}'.dump '#{backup_url}'`
+
+    # copy backup to AWS S3
+    puts "Moving bundle to AWS backup/#{bundle_name}.dump"
+    obj = bucket.objects["backup/#{bundle_name}.dump"]
+    obj.write(Pathname.new("#{bundle_name}.dump"))
+
+    # remove backup
+    `rm '#{bundle_name}'.dump`
+  end
+
+
+
   desc "Refresh facebook tokens"
   task :refresh_facebook_tokens => :environment do
     puts "START: Refresh facebook tokens"
