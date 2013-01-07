@@ -35,6 +35,6 @@
 	<% end %>
 
 	<% if tags.released %>
-	<em>Released:</em> <time class="released" datetime="<%= tags.released.xmlschema %>"><%= tags.released.strftime '%Y' %></time>
+	<em>Released:</em> <time class="released" datetime="<%= tags.released.xmlschema %>"><%= tags.released.strftime('%-m') == '1' ? tags.released.strftime('%Y') : tags.released.strftime('%B %Y') %></time>
 	<% end %>
 </div>
