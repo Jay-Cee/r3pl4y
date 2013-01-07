@@ -4,40 +4,72 @@
 //  Constants, colors, units, functions(?)
 //  -----------------------------------------------------------------
 
+$chart-width: 300px;
+$chart-inner-width: 300px - $space-large;
+
 //  -----------------------------------------------------------------
 //  Struct, base & primitives
 //  -----------------------------------------------------------------
 
-#stats {
-	background-color: white;
+.stats {
 
-	.user-stats {
-		@include border-radius(10px);
-		padding: $space;
-		border: 1px solid $color-border;
-		width: 438px;
-		margin: $space;
-		background-color: #F7F7F7;
+  &>.user-stats {
+    float: left;
+    width: $chart-width;
+  }
+  .chart {
+    border: 1px dashed $color-inactivetext;
+    width: $chart-inner-width;
+    padding: $space-small;
 
-		.label {
-			font-weight: bold;
-		}
-		.label:after {
-			content: ':';
-		}
-	}
+  }
 
-	h2 {
-		margin: $space-large $space $space $space;
-	}
+  &>.review-stats {
+    float: left;
+    width: $chart-width;
+  }
 
-	.row {
-		line-height: 1.25em;
-	}
+  table { 
+    width: $chart-inner-width;;
+    border: 1px solid $color-border;
+    text-align: left;
+    margin-bottom: $space;
+
+    th {
+      background: #000 url(image_path('black_linen_v2.png')) repeat top left;
+      color: #FFF;
+      font-size: $fontsize-header;
+      font-weight: bold;
+      letter-spacing: -1px;
+      line-height: 30px;
+      text-decoration: none;
+      text-shadow: 0 2px black;
+    }
+
+    td {
+      line-height: 16px;
+      width: $chart-inner-width;
+      font-size: $fontsize-small;
+    }
+
+    td, th {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: $space-small;
+      display: block;
+    }
+
+    tr {
+      border-top: 1px solid $color-bordertop;
+      border-bottom: 1px solid $color-border;
+    }
+  }
 }
-//  ...
+
 
 //  -----------------------------------------------------------------
 //  Skins, variations, uniques
 //  -----------------------------------------------------------------
+
 /* @end STATS plugin */

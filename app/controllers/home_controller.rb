@@ -6,7 +6,8 @@ class HomeController < ApplicationController
 			redirect_to '/profile'
 		end
 
-		@reviews = Review.limit(3).order('random()')
+    @users = User.order('created_at DESC').limit(5)
+		@reviews = Review.order('created_at DESC').limit(5)
   end
 
 end

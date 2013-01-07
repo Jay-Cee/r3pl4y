@@ -35,6 +35,9 @@ Replay::Application.routes.draw do
 	match '/sign_up' => 'sign_up#index'
 	match '/sign_up/new' => 'sign_up#new'
 
+  match '/stats/new-users' => 'stats#new_users'
+  match '/stats/new-reviews' => 'stats#new_reviews'
+
   resources :tags
 
 
