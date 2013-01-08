@@ -31,6 +31,8 @@
 
     <% if show_full.rating %>
     <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+      <meta itemprop="worstRating" content="1" />
+      <meta itemprop="bestRating" content="5" />
       <em>My rating:</em> <span class="rating rating-<%= show_full.rating %>" itemprop="ratingValue"><%= show_full.rating %></span>
     </div>
     <% end %>
