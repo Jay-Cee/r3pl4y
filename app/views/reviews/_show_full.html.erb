@@ -1,43 +1,40 @@
-<article class="review full">
+<article class="review full" itemscope itemtype="http://schema.org/Review">
 
-<!-- Game to be reviewed -->
-<div class="game" itemscope itemtype="http://schema.org/CreativeWork">
-  <%= link_to(show_full.game, :class => 'game-link', :itemprop => 'url') do %>
-		<img class="game-cover" src="<%= show_full.game.thumbnail.url(:medium) %>" alt="<%= show_full.game.title %> thumbnail" itemprop="image" />
-		<span class="game-title" itemprop="name"><%=show_full.game.title %></span>
-
-	<% end %>
-
-  <div itemprop="review" itemscope itemtype="http://schema.org/Review">
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <%= link_to(show_full.user, :class => 'user-link', :itemprop => 'url') do %>
-        <span class="user-name" itemprop="name"><%= show_full.user.name %></span>
-      <% end %>
-    </span>
-
-    <!-- When this was published -->
-    <meta itemprop="datePublished" content="<%= show_full.published.strftime("%Y-%m-%d") %>" />
-    <time datetime="<%= show_full.published.xmlschema %>">
-      <%= link_to show_full.published_from(Time.now), user_review_path(show_full.user, show_full), :itemprop => 'url'  %>
-    </time>
-
-    <% if show_full.finished? then %>
-      <span class="star" title="Completed the game">Completed the game</span>
-    <% end %>
-
-    <div class="review-body" itemprop="reviewBody">
-      <%= markdown(show_full.review) %>
-    </div>
-
-    <% if show_full.rating %>
-    <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-      <meta itemprop="worstRating" content="1" />
-      <meta itemprop="bestRating" content="5" />
-      <em>My rating:</em> <span class="rating rating-<%= show_full.rating %>" itemprop="ratingValue"><%= show_full.rating %></span>
-    </div>
+  <!-- Game to be reviewed -->
+  <div class="game" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
+    <%= link_to(show_full.game, :class => 'game-link', :itemprop => 'url') do %>
+      <img class="game-cover" src="<%= show_full.game.thumbnail.url(:medium) %>" alt="<%= show_full.game.title %> thumbnail" itemprop="image" />
+      <span class="game-title" itemprop="name"><%=show_full.game.title %></span>
     <% end %>
   </div>
 
+  <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <%= link_to(show_full.user, :class => 'user-link', :itemprop => 'url') do %>
+      <span class="user-name" itemprop="name"><%= show_full.user.name %></span>
+    <% end %>
+  </span>
+
+  <!-- When this was published -->
+  <meta itemprop="datePublished" content="<%= show_full.published.strftime("%Y-%m-%d") %>" />
+  <time datetime="<%= show_full.published.xmlschema %>">
+    <%= link_to show_full.published_from(Time.now), user_review_path(show_full.user, show_full), :itemprop => 'url'  %>
+  </time>
+
+  <% if show_full.finished? then %>
+    <span class="star" title="Completed the game">Completed the game</span>
+  <% end %>
+
+  <div class="review-body" itemprop="reviewBody">
+    <%= markdown(show_full.review) %>
+  </div>
+
+  <% if show_full.rating %>
+  <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+    <meta itemprop="worstRating" content="1" />
+    <meta itemprop="bestRating" content="5" />
+    <em>My rating:</em> <span class="rating rating-<%= show_full.rating %>" itemprop="ratingValue"><%= show_full.rating %></span>
+  </div>
+  <% end %>
+
   <div class="clear"></div>
-</div>
 </article>
