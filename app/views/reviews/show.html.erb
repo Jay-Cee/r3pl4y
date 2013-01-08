@@ -1,5 +1,5 @@
 <%# Set the page title %>
-<% content_for :title do %><%= "#{@review.user.name} reviews #{@review.game.title}" %><% end %>
+<% content_for :title do %><%= "#{@review.game.title} - #{@review.user.name}" %><% end %>
 
 
 <section class="review-card">

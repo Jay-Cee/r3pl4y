@@ -1,5 +1,9 @@
 <article class="review full" itemscope itemtype="http://schema.org/Review">
 
+  <!-- Meta -->
+  <meta itemprop="name" content="<%= show_full.game.title %>" />
+  <meta itemprop="image" content="<%= show_full.game.thumbnail.url(:medium) %>" />
+
   <!-- Game to be reviewed -->
   <div class="game" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
     <%= link_to(show_full.game, :class => 'game-link', :itemprop => 'url') do %>
