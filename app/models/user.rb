@@ -13,8 +13,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
-	#friendly_id :name, :use => :slugged, :strip_non_ascii => true
-	
 	def to_param
 		name
 	end
@@ -115,7 +113,7 @@ class User < ActiveRecord::Base
 		r3pl4y_uids = friends.map {|f| f.r3pl4y_uid }.compact
 
 		User.where('twitter_auth IN (:twitter_uids) OR facebook_auth IN (:facebook_uids) OR steam_auth IN (:steam_uids) OR id IN (:r3pl4y_uids)',
-			{ :twitter_uids => twitter_uids, :facebook_uids => facebook_uids, :steam_uids => steam_uids, :r3pl4y_uids => r3pl4y_uids}).order('random()').uniq
+			{ :twitter_uids => twitter_uids, :facebook_uids => facebook_uids, :steam_uids => steam_uids, :r3pl4y_uids => r3pl4y_uids}).order('name ASC').uniq
 	end
 
 	def followers
@@ -125,7 +123,7 @@ class User < ActiveRecord::Base
 		r3pl4y_uids = friends.map {|f| f.r3pl4y_uid }.compact
 
 		User.joins(:friends).where('(:twitter_auth IS NOT NULL AND friends.twitter_uid = :twitter_auth) OR (:facebook_auth IS NOT NULL AND friends.facebook_uid = facebook_auth) OR (:steam_auth IS NOT NULL AND friends.steam_uid = :steam_auth) OR (friends.r3pl4y_uid = :r3pl4y_id)',
-			{ :twitter_auth => twitter_auth, :facebook_auth => facebook_auth, :steam_auth => steam_auth, :r3pl4y_id => id }).order('random()').uniq
+			{ :twitter_auth => twitter_auth, :facebook_auth => facebook_auth, :steam_auth => steam_auth, :r3pl4y_id => id }).order('name ASC').uniq
 	end
 
 	def invite_phrase
