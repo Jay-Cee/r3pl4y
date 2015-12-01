@@ -7,8 +7,8 @@ gem 'rails', '3.2.11'
 
 gem 'pg', '~> 0.14.1'
 gem 'execjs', '~> 1.4'
-gem "libv8", git: "git://github.com/cowboyd/libv8.git", branch: '3.11', submodules: true
-gem 'therubyracer', '~> 0.11.4', :require => 'v8'
+gem 'libv8', '3.16.14.13'
+gem 'therubyracer', '0.12.2'
 gem 'twitter', '~> 4.4.4'
 gem 'fb_graph', '~> 2.6.1'
 gem 'heroku', '~> 2.33.5'
