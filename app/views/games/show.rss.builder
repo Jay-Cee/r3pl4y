@@ -2,7 +2,7 @@ xml.instruct! :xml, :version => '1.0'
 xml.rss "version" => "2.0" do
  xml.channel do
    xml.title "#{@game.title} reviews"
-   xml.description "r3pl4y.com reviews for: #{@game.title}"
+   xml.description "r3pl4y reviews for: #{@game.title}"
    xml.link game_url(@game)
 
    @game.reviews.each do |review|

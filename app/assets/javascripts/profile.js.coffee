@@ -329,7 +329,7 @@ namespace "replay.profile", (exports) ->
 
   class Profile
     constructor : (@body) ->
-      @tumblr_error_msg = $('<p />', class : 'alert').text('Failed to load last blogpost from <a href="http://blog.r3pl4y.com">http://blog.r3pl4y.com</a>')
+      @tumblr_error_msg = $('<p />', class : 'alert').text('Failed to load last blogpost from <a href="http://r3pl4ycom.tumblr.com">http://r3pl4ycom.tumblr.com</a>')
 
       # bind li click to inner link
       @body.on('click', '.game-list li', -> $(this).find('a.game-link').click())

@@ -47,11 +47,11 @@ class Review < ActiveRecord::Base
 			app = FbGraph::Application.new(ENV['facebook_app_id'])
 			me = FbGraph::User.me(user.facebook_access_token)
 
-			logger.info "Facebook: User #{user.name} reviewing game #{Rails.application.routes.url_helpers.game_url(game, :host => 'r3pl4y.com')}"
+			logger.info "Facebook: User #{user.name} reviewing game #{Rails.application.routes.url_helpers.game_url(game, :host => 'replay.mikaellundin.name')}"
 
 			action = me.og_action!(
 				app.og_action(:review),
-				:game => Rails.application.routes.url_helpers.game_url(game, :host => 'r3pl4y.com'),
+				:game => Rails.application.routes.url_helpers.game_url(game, :host => 'replay.mikaellundin.name'),
 				:content => review,
 				:rating => rating
 			)
@@ -75,7 +75,7 @@ class Review < ActiveRecord::Base
 		# try
 		begin
 			# build message
-			url = Rails.application.routes.url_helpers.user_review_url(user, self, :host => 'r3pl4y.com')
+			url = Rails.application.routes.url_helpers.user_review_url(user, self, :host => 'replay.mikaellundin.name')
 			msg = "#{game.title}: #{trim(review, (95 - game.title.length))}... #r3pl4y #{url}"
 			logger.debug "Updating twitter for (#{user.name}): #{msg}"
 
