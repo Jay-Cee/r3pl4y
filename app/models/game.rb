@@ -21,8 +21,8 @@ class Game < ActiveRecord::Base
 		:s3_options => {
 		  :content_disposition => 'attachment'
 		},
-		:s3_bucket => 'files.r3pl4y.com',
-    :s3_host_alias => 'files.r3pl4y.com',
+		:s3_bucket => 'replay-files.mikaellundin.name',
+    :s3_host_alias => 'replay-files.mikaellundin.name',
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
 		:path => ":attachment/:id/:style.:extension"
 	
@@ -41,8 +41,8 @@ class Game < ActiveRecord::Base
 		:s3_options => {
 		  :content_disposition => 'attachment'
 		},
-		:s3_bucket => 'files.r3pl4y.com',
-    :s3_host_alias => 'files.r3pl4y.com',
+		:s3_bucket => 'replay-files.mikaellundin.name',
+    :s3_host_alias => 'replay-files.mikaellundin.name',
     :s3_headers => {'Expires' => 1.year.from_now.httpdate},
 		:path => ":attachment/:id/:style.:extension"
 

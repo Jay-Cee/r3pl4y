@@ -12,7 +12,7 @@ class GameImportJob < Struct.new(:path, :platform)
     s3 = AWS::S3.new
 
     # application bucket
-    bucket_name = 'files.r3pl4y.com'
+    bucket_name = 'replay-files.mikaellundin.name'
 
     # fetch file from s3
     logger.debug "Fetch import file from S3: #{path}"

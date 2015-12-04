@@ -18,7 +18,7 @@ class ImportController < ApplicationController
     s3 = AWS::S3.new
 
     # application bucket
-    bucket_name = 'files.r3pl4y.com'
+    bucket_name = 'replay-files.mikaellundin.name'
 
     # store
     timestamp = Time.now.utc.strftime('%Y%m%d%H%M%S')
