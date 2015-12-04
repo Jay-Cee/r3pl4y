@@ -16,3 +16,13 @@
 </aside>
 <!-- END: aside -->
 <% end %>
+
+<% content_for :meta do %>
+<!-- START: Twitter Summary Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@rubriks" />
+<meta name="twitter:title" content="<%= "#{@review.game.title} reviewed by #{@review.user.name}" %>" />
+<meta name="twitter:description" content="<%= "Gives this game a #{@review.rating} out of 5" %>" />
+<meta name="twitter:image" content="<%= @review.game.thumbnail.url %>" />
+<!-- END: Twitter Summary Card -->
+<% end %>

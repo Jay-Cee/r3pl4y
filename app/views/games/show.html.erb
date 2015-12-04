@@ -41,6 +41,14 @@
 <meta property="og:description" content="<%= @game.description %>" /> 
 <meta property="og:image"       content="<%= @game.thumbnail.url %>" /> 
 <!-- END: Facebook Open Graph -->
+
+<!-- START: Twitter Summary Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@rubriks" />
+<meta name="twitter:title" content="<%= "#{@game.title}" %>" />
+<meta name="twitter:description" content="<%= truncate(@game.description) %>" />
+<meta name="twitter:image" content="<%= @game.thumbnail.url %>" />
+<!-- END: Twitter Summary Card -->
 <% end %>
 
 <% content_for :head_attr do %>prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# game: http://ogp.me/ns/game#"<% end %>
