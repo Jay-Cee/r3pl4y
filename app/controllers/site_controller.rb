@@ -12,7 +12,7 @@ class SiteController < ApplicationController
 		require 'open-uri'
 		require 'json'
 
-		name = 'blog.r3pl4y.com'
+		name = 'r3pl4ycom.tumblr.com'
 		api_key = ENV['tumblr_api_key']
     uri = "http://api.tumblr.com/v2/blog/#{name}/posts/text?api_key=#{api_key}&limit=1"
 
