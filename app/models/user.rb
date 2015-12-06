@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
                 logger.debug "user.twitter_auth: #{auth["uid"]}"
                 logger.debug "user.email: #{name}#{auth['uid']}@r3pl4y.com"
                 logger.debug "user.picture: #{auth['info']['image']}"
-                logger.debug "user.friends: #{(get_tw_friends(auth["info"]["nickname"]) | [(Friend.create :r3pl4y_uid => invited_by)]).to_yaml}"
+                #logger.debug "user.friends: #{(get_tw_friends(auth["info"]["nickname"]) | [(Friend.create :r3pl4y_uid => invited_by)]).to_yaml}"
                 logger.debug "user.invited_by: #{invited_by}"
 
 				result = create! do |user|
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 					user.twitter_auth = auth["uid"]
 					user.email = "#{name}#{auth['uid']}@r3pl4y.com"
 					user.picture = auth['info']['image']
-					user.friends = get_tw_friends(auth["info"]["nickname"]) | [(Friend.create :r3pl4y_uid => invited_by)]
+					#user.friends = get_tw_friends(auth["info"]["nickname"]) | [(Friend.create :r3pl4y_uid => invited_by)]
 					user.invited_by = invited_by
 			end
 
