@@ -2,7 +2,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	protect_from_forgery :except => [:twitter,:facebook,:steam]
 
   def twitter
-		begin
 			logger.debug "Called twitter callback"
             
 			auth = request.env['omniauth.auth']
@@ -33,27 +32,19 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 			# for twitter publishing, update when expired
 			if @user.twitter_oauth_token != auth['credentials']['token'] or @user.twitter_oauth_secret != auth['credentials']['secret']
-                logger.debug "Update twitter publishing token and secret"
 
 				@user.twitter_oauth_token = auth['credentials']['token']
 				@user.twitter_oauth_secret = auth['credentials']['secret']
 
-                logger.debug "Save user"
 				@user.save
 			end
 
 			#flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Twitter"
-            logger.debug "Sign in and redirect user"
 			sign_in_and_redirect @user, :event => :authentication
-
-		rescue Exception => exc
-			puts "Exception occured in omniauth: #{exc.message}"
-		end
   end
 
 	def facebook
-		begin
-			puts 'Called facebook callback'
+			logger.debug 'Called facebook callback'
 
 			auth = request.env['omniauth.auth'];
             params = request.env['omniauth.params']
@@ -83,15 +74,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 			flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
 			sign_in_and_redirect @user, :event => :authentication
-
-		rescue Exception => exc
-			puts "Exception occured in omniauth: #{exc.message}"
-		end
 	end
 
 	def steam
-		begin
-			puts 'Called steam callback'
+			logger.debug 'Called steam callback'
 
 			auth = request.env['omniauth.auth']
             params = request.env['omniauth.params']
@@ -122,9 +108,5 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 			flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Steam"
 			sign_in_and_redirect @user, :event => :authentication
-
-		rescue Exception => exc
-			puts "Exception occured in omniauth: #{exc.message}"
-		end
 	end
 end
