@@ -4,42 +4,31 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
 		begin
 			logger.debug "Called twitter callback"
-            logger.debug "omniauth.auth: #{request.env['omniauth.auth']}"
-            logger.debug "omniauth.params: #{request.env['omniauth.params']}"
             
 			auth = request.env['omniauth.auth']
             params = request.env['omniauth.params']
 
-            logger.debug "Try to find if user is already registered"
 			@user = User.find_by_twitter_auth(auth['uid'])
 
 			# if not logged in and user not found
 			if current_user.nil? and @user.nil? then
-                logger.debug "User is not logged in and not found as already registered"
 				@user = User.create_with_omniauth(auth, params['follow'])
-                logger.debug "Save user"
 				@user.save
 
 			# adding new identity provider
 			elsif not current_user.nil? and @user.nil? then
-                logger.debug "User is logged in, and not found as registered\nAdding Twitter provider to existing user"
 				@user = current_user
 				@user.twitter_auth = auth['uid']
-                logger.debug "Add twitter friends as r3pl4y friends"
 				@user.friends = @user.friends | User.get_tw_friends(auth['info']['nickname'])
-                logger.debug "Save user"
 				@user.save
 
 			# merging two accounts
 			elsif not current_user.nil? and not @user.nil? and current_user != @user then
-                logger.debug "Performing merge between #{current_user.name} and #{@user.name}"
 				current_user.merge(@user)
 				@user = current_user
 				@user.twitter_auth = auth['uid']
 				
-                logger.debug "Save user"
 				@user.save
-
 			end
 
 			# for twitter publishing, update when expired
