@@ -4,8 +4,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
 		begin
 			logger.debug "Called twitter callback"
-            logger.debug "omniauth.auth: #{omniauth.auth}"
-            logger.debug "omniauth.params: #{omniauth.params}"
+            logger.debug "omniauth.auth: #{request.env['omniauth.auth']}"
+            logger.debug "omniauth.params: #{request.env['omniauth.params']}"
             
 			auth = request.env['omniauth.auth']
             params = request.env['omniauth.params']
