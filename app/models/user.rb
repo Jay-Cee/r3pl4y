@@ -23,7 +23,20 @@ class User < ActiveRecord::Base
 
 		case auth['provider']
 			when 'twitter'
+                logger.debug "create unique name"
 				name = get_name(auth["info"]["nickname"])
+                logger.debug "unique name created: #{name}"
+
+                logger.debug "creating user"
+                logger.debug "user.name: #{name}"
+                logger.debug "user.real_name: #{auth['info']['name']}"
+                logger.debug "user.password: #{Devise.friendly_token[0,20]}"
+                logger.debug "user.twitter_auth: #{auth["uid"]}"
+                logger.debug "user.email: #{name}#{auth['uid']}@r3pl4y.com"
+                logger.debug "user.picture: #{auth['info']['image']}"
+                logger.debug "user.friends: #{(get_tw_friends(auth["info"]["nickname"]) | [(Friend.create :r3pl4y_uid => invited_by)]).to_yaml}"
+                logger.debug "user.invited_by: #{invited_by}"
+
 				result = create! do |user|
 					user.name = name
 					user.real_name = auth['info']['name']
