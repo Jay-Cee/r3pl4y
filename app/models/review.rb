@@ -44,17 +44,18 @@ class Review < ActiveRecord::Base
 		user = User.find(user_id)
 
 		begin
-			app = FbGraph::Application.new(ENV['facebook_app_id'])
-			me = FbGraph::User.me(user.facebook_access_token)
+			graph = Koala::Facebook::API.new(user.facebook_access_token, ENV['facebook_app_secret'])
 
 			logger.info "Facebook: User #{user.name} reviewing game #{Rails.application.routes.url_helpers.game_url(game, :host => 'replay.mikaellundin.name')}"
 
-			action = me.og_action!(
-				app.og_action(:review),
-				:game => Rails.application.routes.url_helpers.game_url(game, :host => 'replay.mikaellundin.name'),
-				:content => review,
-				:rating => rating
-			)
+			result = graph.put_connections(
+				"me", 
+				"rubriks:review", 
+				game: Rails.application.routes.url_helpers.game_url(game, :host => 'replay.mikaellundin.name'), 
+				content: review, 
+				rating: rating)
+
+			logger.info "Successful facebook publish: #{result.to_yaml}"
 
 		rescue Exception => exc
 			logger.error "Failed to publish review #{id} to facebook #{user.facebook_auth}"
