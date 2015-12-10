@@ -53,7 +53,8 @@ class Review < ActiveRecord::Base
 				"rubriks:review", 
 				game: Rails.application.routes.url_helpers.game_url(game, :host => 'replay.mikaellundin.name'), 
 				content: review, 
-				rating: rating)
+				rating: rating,
+				"fb:explicitly_shared" => true)
 
 			logger.info "Successful facebook publish: #{result.to_yaml}"
 
