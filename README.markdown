@@ -1,6 +1,6 @@
 R3PL4Y
 ======
-This is the code project of r3pl4y.com. Here main development of the website is done and contributions in form of pull requests are accepted. For contributing, see contribution section further on.
+This is the code project of replay.mikaellundin.name. Here main development of the website is done and contributions in form of pull requests are accepted. For contributing, see contribution section further on.
 
 Getting Started
 ---------------
